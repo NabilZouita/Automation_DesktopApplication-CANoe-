@@ -12,7 +12,6 @@ class ExcelPy:
         #### First test case ####
         #print("Hello world !")
         pass
-
         #### Test File entered #####
     def TestFile(self,PathExc):
         try:
