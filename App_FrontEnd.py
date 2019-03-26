@@ -55,19 +55,23 @@ class Ui_MainWindow(object):
         self.pushButton.setGeometry(QtCore.QRect(30, 70, 75, 23))
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.verticalLayout.addWidget(self.frame)
+        
         MainWindow.setCentralWidget(self.centralWidget)
         
         self.menuBar = QtGui.QMenuBar(MainWindow)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 400, 21))
         self.menuBar.setObjectName(_fromUtf8("menuBar"))
+        
         MainWindow.setMenuBar(self.menuBar)
         
         self.mainToolBar = QtGui.QToolBar(MainWindow)
         self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
+        
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
         
         self.statusBar = QtGui.QStatusBar(MainWindow)
         self.statusBar.setObjectName(_fromUtf8("statusBar"))
+        
         MainWindow.setStatusBar(self.statusBar)
 
         self.retranslateUi(MainWindow)
