@@ -12,6 +12,7 @@ class ExcelPy:
         #### First test case ####
         #print("Hello world !")
         pass
+
         #### Test File entered #####
     def TestFile(self,PathExc):
         try:
@@ -47,15 +48,38 @@ class ExcelPy:
 
         return self.LTest_Value, self.LTest_EnVar 
 
-    def LogEditor(self,PathExc):
+    def LogEditorPass(self,PathExc):
         self.wb = openpyxl.load_workbook(PathExc)
-        self.sheet = self.wb.worksheets[1]
-        self.sheet.merge_cells('E2:F6')
-        self.cell = self.sheet.cell(row=2, column=5)
+        self.sheet = self.wb.worksheets[0]
+        self.sheet.merge_cells('C1:D3')
+        self.cell = self.sheet.cell(row=1, column=3)
         self.cell.value = 'Test OK'
         self.cell.alignment = Alignment(horizontal='center', vertical='center')
 
         self.wb.save(PathExc)
+
+    def LogEditorNotPass(self,PathExc):
+        self.wb = openpyxl.load_workbook(PathExc)
+        self.sheet = self.wb.worksheets[0]
+        self.sheet.merge_cells('E2:F6')
+        self.cell = self.sheet.cell(row=2, column=5)
+        self.cell.value = 'Test Not OK'
+        self.cell.alignment = Alignment(horizontal='center', vertical='center')
+
+        self.wb.save(PathExc)
+
+    def Script_Editor(self,ConfigFile,EnvVar,EnvVal):
+        self.file = open("Script.py","w")
+        self.file.write("from Python_CANoe import CANoe \n")
+        self.file.write("var = CANoe() \n")
+        self.file.write("var.open_simulation('%s') \n"%ConfigFile)
+        self.file.write("var.start_Measurement() \n")
+        
+        for i in range(len(EnvVal)):
+            self.file.write("var.set_EnvVar('%s',%s) \n"%(EnvVar[i],EnvVal[i]))
+        
+        self.file.close()
+
 
 class Py_CANoe:
     def __init__(self):
