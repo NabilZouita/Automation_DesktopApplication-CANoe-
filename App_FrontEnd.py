@@ -188,8 +188,23 @@ class Ui_MainWindow(QtGui.QWidget):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def load_sheet(self):
-        self.ExcelSheet = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.xlsx')
+    def load_sheet(self):      
+        try:
+            self.ExcelSheet = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.xlsx')
+        except IOError:
+            self.InstVar = App_BackEnd.ExcelPy()
+            self.EnvVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[0]
+            self.ValVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[1]
+            #print self.EnvVar
+            print self.ValVar
+            self.message = ("Loaded successfully: %s \n"%os.path.split(str(self.ExcelSheet))[1])
+            self.textEdit.clear()
+            self.textEdit.setTextColor(QtGui.QColor("green"))
+            self.textEdit.insertPlainText(self.message)
+        else:
+            raise RuntimeError("You did not choose a file please check")
+
+
         
         #This is for seeing the var type : non str
         #print self.ExcelSheet 
@@ -198,24 +213,13 @@ class Ui_MainWindow(QtGui.QWidget):
         #test = os.path.splitext(str(ExcelSheet))
         #print test
         
-        self.InstVar = App_BackEnd.ExcelPy()
-        self.EnvVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[0]
-        self.ValVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[1]
-        
-        #print self.EnvVar
-        #print self.ValVar
-        
-        self.message = ("Loaded successfully: %s \n"%os.path.split(str(self.ExcelSheet))[1])
-        
-        self.textEdit.clear()
-        self.textEdit.setTextColor(QtGui.QColor("green"))
-        self.textEdit.insertPlainText(self.message)
-
+    
         #print len(self.ValVar)
         #return self.VarTemp
 
     def load_config(self):
         self.ConfigFile = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.cfg')
+        
         self.pushButton_3.setEnabled(True)
         self.pushButton_4.setEnabled(True)
         #print self.ConfigFile
@@ -242,7 +246,7 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.file.close()"""
 
-        self.inst = App_BackEnd.ExcelPy()
+        self.inst = App_BackEnd.Py_CANoe()
         self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
 
         self.message = ("Your script has been generated successfully:")
