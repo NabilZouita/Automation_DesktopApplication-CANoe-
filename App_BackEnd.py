@@ -12,7 +12,6 @@ class ExcelPy:
         #### First test case ####
         #print("Hello world !")
         pass
-
         #### Test File entered #####
     def TestFile(self,PathExc):
         try:
@@ -45,7 +44,7 @@ class ExcelPy:
         self.LTest_EnVar = self.sheet.col_values(0)
         self.LTest_Value = self.sheet.col_values(1)
         
-        return self.LTest_Value, self.LTest_EnVar
+        return self.LTest_EnVar, self.LTest_Value
         '''
         for i in range(1,self.sheet.nrows):
             self.cell_value = self.sheet.cell(i,1).value
@@ -85,7 +84,7 @@ class Py_CANoe:
     def __init__(self):
         pass
     # Checking path will be done in Python_CANoe.py
-    def Script_Editor(self,ConfigFile,EnvVar,EnvVal):
+    def Script_Editor(self,ConfigFile,EnvVar,EnvVal,envVar,envVal):
         self.file = open("Script.py","w")
         
         self.file.write("from Python_CANoe import CANoe \n")
@@ -95,16 +94,20 @@ class Py_CANoe:
         
         for i in range(len(EnvVal)):
             self.file.write("var.set_EnvVar('%s',%s) \n"%(EnvVar[i],EnvVal[i]))
-        
+
+        for i in range(len(envVal)):
+            self.file.write("var.set_EnvVar('%s',%s) \n"%(envVar[i],envVal[i]))
+      
         self.file.close()
+
+    def Script_SEditor(self):
+        pass
 
     def PyCan_Exec(self,path):
         self.root = CANoe()
         self.root.open_simulation(path) #CANoe function restriction are in package
         self.root.start_Measurement()
         self.root.set_EnvVar()
-        
-
 '''
 PathExc = "Python_ExcelParse.xlsx"
 inst = ExcelPy()
