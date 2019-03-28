@@ -126,6 +126,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
         self.radioButton_2.clicked.connect(self.test_notPassed)
         ############ The End ##############
+
         self.verticalLayoutWidget_3 = QtGui.QWidget(self.frame)
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(189, 80, 181, 61))
         self.verticalLayoutWidget_3.setObjectName(_fromUtf8("verticalLayoutWidget_3"))
@@ -141,6 +142,8 @@ class Ui_MainWindow(QtGui.QWidget):
         self.comboBox = QtGui.QComboBox(self.widget_4)
         self.comboBox.setGeometry(QtCore.QRect(10, 0.75, 91, 22))
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
+        self.comboBox.currentIndexChanged.connect(self.ScndSheet)
+        """
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
@@ -176,6 +179,12 @@ class Ui_MainWindow(QtGui.QWidget):
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
+        """
+        self.spinBox = QtGui.QSpinBox(self.widget_4)
+        self.spinBox.setGeometry(QtCore.QRect(110, 0.75, 42, 22))
+        self.spinBox.setObjectName(_fromUtf8("spinBox"))
+        self.spinBox.setMinimum(0)
+        self.spinBox.valueChanged.connect(self.ValueChange)
 
         self.verticalLayout_3.addWidget(self.widget_4)
         ############ ComboBox Layout code ##########
@@ -265,9 +274,7 @@ class Ui_MainWindow(QtGui.QWidget):
         
         """ Trying to change the type of var """
         #test = os.path.splitext(str(ExcelSheet))
-        #print test
-        
-    
+        #print test   
         #print len(self.ValVar)
         #return self.VarTemp
 
@@ -275,8 +282,6 @@ class Ui_MainWindow(QtGui.QWidget):
         self.ConfigFile = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.cfg')
         self.FileName = os.path.split(str(self.ConfigFile))[1]
         if (self.FileName != ""):
-            self.pushButton_3.setEnabled(True)
-            self.pushButton_4.setEnabled(True)
             #print self.ConfigFile
             self.message = ("Loaded successfully: %s"%os.path.split(str(self.ConfigFile))[1])
             self.textEdit.clear()
@@ -288,7 +293,6 @@ class Ui_MainWindow(QtGui.QWidget):
             self.textEdit.setTextColor(QtGui.QColor("red"))
             self.textEdit.insertPlainText(self.message)
 
-        
         """ Caling PyCan_Exec from here """
         #self.VarTemp = App_BackEnd.Py_CANoe()
         #print self.VarTemp.PyCan_Exec(self.ConfigFile)
@@ -307,9 +311,9 @@ class Ui_MainWindow(QtGui.QWidget):
         self.file.close()"""
 
         self.inst = App_BackEnd.Py_CANoe()
-        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
+        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar,self.envVar,self.valVar)
 
-        self.message = ("Your script has been generated successfully:")
+        self.message = ("Script generated successfully.")
         
         self.textEdit.clear()
         self.textEdit.setTextColor(QtGui.QColor("green"))
@@ -355,6 +359,23 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
+    def ValueChange(self):
+        self.message = ("current value:"+str(self.spinBox.value()))
+        for i in range(0,self.spinBox.value()):
+            self.comboBox.addItem(_fromUtf8(""))
+            self.comboBox.setItemText(i, _translate("MainWindow", "Test %d"%(i+1), None))
+
+    def ScndSheet(self,index):
+        print ("Current index:",(index+1))
+        self.InstVar = App_BackEnd.ExcelPy()
+        self.envVar = self.InstVar.ParseSSheet(str(self.ExcelSheet),index+1)[0]
+        self.valVar = self.InstVar.ParseSSheet(str(self.ExcelSheet),index+1)[1]
+        self.pushButton_3.setEnabled(True)
+        self.pushButton_4.setEnabled(True)
+
+        print self.envVar
+        print self.valVar
+
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.pushButton.setText(_translate("MainWindow", "Load", None))
@@ -363,7 +384,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton_4.setText(_translate("MainWindow", "Execute", None))
         self.radioButton.setText(_translate("MainWindow","Test OK",None))
         self.radioButton_2.setText(_translate("MainWindow","Test Not OK",None))
-
+        """
         self.comboBox.setItemText(0, _translate("MainWindow", "Test 1", None))
         self.comboBox.setItemText(1, _translate("MainWindow", "Test 2", None))
         self.comboBox.setItemText(2, _translate("MainWindow", "Test 3", None))
@@ -399,7 +420,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.comboBox.setItemText(32, _translate("MainWindow", "Test 33", None))
         self.comboBox.setItemText(33, _translate("MainWindow", "Test 34", None))
         self.comboBox.setItemText(34, _translate("MainWindow", "Test 35", None))
-
+        """
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
         self.actionOpen_Sheet.setText(_translate("MainWindow", "Open Sheet", None))
