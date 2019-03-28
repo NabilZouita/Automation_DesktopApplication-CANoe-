@@ -111,21 +111,76 @@ class Ui_MainWindow(QtGui.QWidget):
         #self.textEdit.clicked.connect(self.TextEditor)
         
         self.horizontalLayout.addWidget(self.widget_3)
-        
+        ############ RadioButtons Layout Code ###########
         self.widget_2 = QtGui.QWidget(self.frame)
-        self.widget_2.setGeometry(QtCore.QRect(190, 0, 179, 149))
+        self.widget_2.setGeometry(QtCore.QRect(190, 0, 179, 71))
         self.widget_2.setObjectName(_fromUtf8("widget_2"))
         
         self.radioButton = QtGui.QRadioButton(self.widget_2)
-        self.radioButton.setGeometry(QtCore.QRect(20, 40, 82, 17))
+        self.radioButton.setGeometry(QtCore.QRect(20, 20, 82, 17))
         self.radioButton.setObjectName(_fromUtf8("radioButton"))
         self.radioButton.clicked.connect(self.test_passed)
         
         self.radioButton_2 = QtGui.QRadioButton(self.widget_2)
-        self.radioButton_2.setGeometry(QtCore.QRect(20, 80, 82, 17))
+        self.radioButton_2.setGeometry(QtCore.QRect(20, 50, 82, 17))
         self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
         self.radioButton_2.clicked.connect(self.test_notPassed)
         ############ The End ##############
+        self.verticalLayoutWidget_3 = QtGui.QWidget(self.frame)
+        self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(189, 80, 181, 61))
+        self.verticalLayoutWidget_3.setObjectName(_fromUtf8("verticalLayoutWidget_3"))
+        
+        self.verticalLayout_3 = QtGui.QVBoxLayout(self.verticalLayoutWidget_3)
+        self.verticalLayout_3.setMargin(11)
+        self.verticalLayout_3.setSpacing(6)
+        self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
+        
+        self.widget_4 = QtGui.QWidget(self.verticalLayoutWidget_3)
+        self.widget_4.setObjectName(_fromUtf8("widget_4"))
+        
+        self.comboBox = QtGui.QComboBox(self.widget_4)
+        self.comboBox.setGeometry(QtCore.QRect(10, 0.75, 91, 22))
+        self.comboBox.setObjectName(_fromUtf8("comboBox"))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+
+        self.verticalLayout_3.addWidget(self.widget_4)
+        ############ ComboBox Layout code ##########
+
+        ############ The End #############
 
         MainWindow.setCentralWidget(self.centralWidget)
         
@@ -191,21 +246,20 @@ class Ui_MainWindow(QtGui.QWidget):
     def load_sheet(self):      
         try:
             self.ExcelSheet = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.xlsx')
-        except IOError:
             self.InstVar = App_BackEnd.ExcelPy()
             self.EnvVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[0]
             self.ValVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[1]
             #print self.EnvVar
-            print self.ValVar
+            #print self.ValVar
             self.message = ("Loaded successfully: %s \n"%os.path.split(str(self.ExcelSheet))[1])
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("green"))
             self.textEdit.insertPlainText(self.message)
-        else:
-            raise RuntimeError("You did not choose a file please check")
-
-
-        
+        except IOError:
+            self.message = "You did not choose a file \n Please check again!"
+            self.textEdit.clear()
+            self.textEdit.setTextColor(QtGui.QColor("red"))
+            self.textEdit.insertPlainText(self.message)        
         #This is for seeing the var type : non str
         #print self.ExcelSheet 
         
@@ -219,16 +273,22 @@ class Ui_MainWindow(QtGui.QWidget):
 
     def load_config(self):
         self.ConfigFile = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.cfg')
-        
-        self.pushButton_3.setEnabled(True)
-        self.pushButton_4.setEnabled(True)
-        #print self.ConfigFile
-        self.message = ("Loaded successfull: %s"%os.path.split(str(self.ConfigFile))[1])
-        
-        self.textEdit.clear()
-        self.textEdit.setTextColor(QtGui.QColor("green"))
-        self.textEdit.insertPlainText(self.message)
+        self.FileName = os.path.split(str(self.ConfigFile))[1]
+        if (self.FileName != ""):
+            self.pushButton_3.setEnabled(True)
+            self.pushButton_4.setEnabled(True)
+            #print self.ConfigFile
+            self.message = ("Loaded successfully: %s"%os.path.split(str(self.ConfigFile))[1])
+            self.textEdit.clear()
+            self.textEdit.setTextColor(QtGui.QColor("green"))
+            self.textEdit.insertPlainText(self.message)
+        else:
+            self.message = ("You did not choose a correct Config File \n Please Check !")
+            self.textEdit.clear()
+            self.textEdit.setTextColor(QtGui.QColor("red"))
+            self.textEdit.insertPlainText(self.message)
 
+        
         """ Caling PyCan_Exec from here """
         #self.VarTemp = App_BackEnd.Py_CANoe()
         #print self.VarTemp.PyCan_Exec(self.ConfigFile)
@@ -283,7 +343,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.state = self.radioButton.isChecked()
         if self.state == True:
             self.inst = App_BackEnd.ExcelPy()
-            self.inst.LogEditorPass(str(self.ExcelSheet))
+            self.inst.LogEditorPass(str(self.ExcelSheet),0)
         else:
             pass
 
@@ -291,7 +351,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.state = self.radioButton_2.isChecked()
         if self.state == True:
             self.inst = App_BackEnd.ExcelPy()
-            self.inst.LogEditorNotPass(str(self.ExcelSheet))
+            self.inst.LogEditorNotPass(str(self.ExcelSheet),0)
         else:
             pass
 
@@ -303,6 +363,43 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton_4.setText(_translate("MainWindow", "Execute", None))
         self.radioButton.setText(_translate("MainWindow","Test OK",None))
         self.radioButton_2.setText(_translate("MainWindow","Test Not OK",None))
+
+        self.comboBox.setItemText(0, _translate("MainWindow", "Test 1", None))
+        self.comboBox.setItemText(1, _translate("MainWindow", "Test 2", None))
+        self.comboBox.setItemText(2, _translate("MainWindow", "Test 3", None))
+        self.comboBox.setItemText(3, _translate("MainWindow", "Test 4", None))
+        self.comboBox.setItemText(4, _translate("MainWindow", "Test 5", None))
+        self.comboBox.setItemText(5, _translate("MainWindow", "Test 6", None))
+        self.comboBox.setItemText(6, _translate("MainWindow", "Test 7", None))
+        self.comboBox.setItemText(7, _translate("MainWindow", "Test 8", None))
+        self.comboBox.setItemText(8, _translate("MainWindow", "Test 9", None))
+        self.comboBox.setItemText(9, _translate("MainWindow", "Test 10", None))
+        self.comboBox.setItemText(10, _translate("MainWindow", "Test 11", None))
+        self.comboBox.setItemText(11, _translate("MainWindow", "Test 12", None))
+        self.comboBox.setItemText(12, _translate("MainWindow", "Test 13", None))
+        self.comboBox.setItemText(13, _translate("MainWindow", "Test 14", None))
+        self.comboBox.setItemText(14, _translate("MainWindow", "Test 15", None))
+        self.comboBox.setItemText(15, _translate("MainWindow", "Test 16", None))
+        self.comboBox.setItemText(16, _translate("MainWindow", "Test 17", None))
+        self.comboBox.setItemText(17, _translate("MainWindow", "Test 18", None))
+        self.comboBox.setItemText(18, _translate("MainWindow", "Test 19", None))
+        self.comboBox.setItemText(19, _translate("MainWindow", "Test 20", None))
+        self.comboBox.setItemText(20, _translate("MainWindow", "Test 21", None))
+        self.comboBox.setItemText(21, _translate("MainWindow", "Test 22", None))
+        self.comboBox.setItemText(22, _translate("MainWindow", "Test 23", None))
+        self.comboBox.setItemText(23, _translate("MainWindow", "Test 24", None))
+        self.comboBox.setItemText(24, _translate("MainWindow", "Test 25", None))
+        self.comboBox.setItemText(25, _translate("MainWindow", "Test 26", None))
+        self.comboBox.setItemText(26, _translate("MainWindow", "Test 27", None))
+        self.comboBox.setItemText(27, _translate("MainWindow", "Test 28", None))
+        self.comboBox.setItemText(28, _translate("MainWindow", "Test 29", None))
+        self.comboBox.setItemText(29, _translate("MainWindow", "Test 30", None))
+        self.comboBox.setItemText(30, _translate("MainWindow", "Test 31", None))
+        self.comboBox.setItemText(31, _translate("MainWindow", "Test 32", None))
+        self.comboBox.setItemText(32, _translate("MainWindow", "Test 33", None))
+        self.comboBox.setItemText(33, _translate("MainWindow", "Test 34", None))
+        self.comboBox.setItemText(34, _translate("MainWindow", "Test 35", None))
+
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
         self.actionOpen_Sheet.setText(_translate("MainWindow", "Open Sheet", None))
