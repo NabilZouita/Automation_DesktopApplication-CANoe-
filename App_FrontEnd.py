@@ -26,7 +26,8 @@ except AttributeError:
 
 class Ui_MainWindow(QtGui.QWidget):
     def setupUi(self, MainWindow):
-        
+        #self.ExcelSheet = None
+
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(407, 300)
         MainWindow.setWindowIcon(QtGui.QIcon('python_logo.png'))
@@ -141,11 +142,9 @@ class Ui_MainWindow(QtGui.QWidget):
         self.widget_4.setObjectName(_fromUtf8("widget_4"))
         
         self.comboBox = QtGui.QComboBox(self.widget_4)
-        self.comboBox.setGeometry(QtCore.QRect(0, 0.75, 120, 22))
+        self.comboBox.setGeometry(QtCore.QRect(10, 0.75, 91, 22))
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
-        self.comboBox.currentIndexChanged.connect(self.ScndSheet)
-        self.comboBox.addItem(_fromUtf8(""))
-        
+        self.comboBox.currentIndexChanged.connect(self.SecondSheet)  
         """
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
@@ -184,7 +183,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.comboBox.addItem(_fromUtf8(""))
         """
         self.spinBox = QtGui.QSpinBox(self.widget_4)
-        self.spinBox.setGeometry(QtCore.QRect(119, 0.75, 42, 22))
+        self.spinBox.setGeometry(QtCore.QRect(110, 0.75, 42, 22))
         self.spinBox.setObjectName(_fromUtf8("spinBox"))
         self.spinBox.setMinimum(0)
         self.spinBox.valueChanged.connect(self.ValueChange)
@@ -258,8 +257,8 @@ class Ui_MainWindow(QtGui.QWidget):
 
 
     def load_sheet(self):
-        self.ExcelSheet = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.xlsx')
         try:
+            self.ExcelSheet = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.xlsx')
             self.InstVar = App_BackEnd.ExcelPy()
             self.EnvVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[0]
             self.ValVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[1]
@@ -274,6 +273,8 @@ class Ui_MainWindow(QtGui.QWidget):
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("red"))
             self.textEdit.insertPlainText(self.message)
+        except:
+            raise
 
         #This is for seeing the var type : non str
         #print self.ExcelSheet 
@@ -321,7 +322,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.file.close()"""
 
         self.inst = App_BackEnd.Py_CANoe()
-        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
+        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar,self.envVar,self.valVar)
 
         self.message = ("Script generated successfully.")
         
@@ -384,11 +385,11 @@ class Ui_MainWindow(QtGui.QWidget):
             self.comboBox.setItemText(i, _translate("MainWindow", "Test %d"%(i+1), None))
 
 
-    def ScndSheet(self,index):
+    def SecondSheet(self,index):
         print ("Current index:",(index+1))
         self.InstVar = App_BackEnd.ExcelPy()
-        self.envVar = self.InstVar.ParseSSheet(str(self.ExcelSheet),(index+1))[0]
-        self.valVar = self.InstVar.ParseSSheet(str(self.ExcelSheet),(index+1))[1]
+        self.envVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index+1))[0]
+        self.valVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index+1))[1]
         
         print self.envVar
         print self.valVar
