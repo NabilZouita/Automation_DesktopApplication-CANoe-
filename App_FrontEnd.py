@@ -125,6 +125,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.radioButton_2.setGeometry(QtCore.QRect(20, 50, 82, 17))
         self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
         self.radioButton_2.clicked.connect(self.test_notPassed)
+
         ############ The End ##############
 
         self.verticalLayoutWidget_3 = QtGui.QWidget(self.frame)
@@ -140,9 +141,11 @@ class Ui_MainWindow(QtGui.QWidget):
         self.widget_4.setObjectName(_fromUtf8("widget_4"))
         
         self.comboBox = QtGui.QComboBox(self.widget_4)
-        self.comboBox.setGeometry(QtCore.QRect(10, 0.75, 91, 22))
+        self.comboBox.setGeometry(QtCore.QRect(0, 0.75, 120, 22))
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
         self.comboBox.currentIndexChanged.connect(self.ScndSheet)
+        self.comboBox.addItem(_fromUtf8(""))
+        
         """
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
@@ -181,12 +184,13 @@ class Ui_MainWindow(QtGui.QWidget):
         self.comboBox.addItem(_fromUtf8(""))
         """
         self.spinBox = QtGui.QSpinBox(self.widget_4)
-        self.spinBox.setGeometry(QtCore.QRect(110, 0.75, 42, 22))
+        self.spinBox.setGeometry(QtCore.QRect(119, 0.75, 42, 22))
         self.spinBox.setObjectName(_fromUtf8("spinBox"))
         self.spinBox.setMinimum(0)
         self.spinBox.valueChanged.connect(self.ValueChange)
 
         self.verticalLayout_3.addWidget(self.widget_4)
+        
         ############ ComboBox Layout code ##########
 
         ############ The End #############
@@ -252,9 +256,10 @@ class Ui_MainWindow(QtGui.QWidget):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def load_sheet(self):      
+
+    def load_sheet(self):
+        self.ExcelSheet = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.xlsx')
         try:
-            self.ExcelSheet = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.xlsx')
             self.InstVar = App_BackEnd.ExcelPy()
             self.EnvVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[0]
             self.ValVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[1]
@@ -268,7 +273,8 @@ class Ui_MainWindow(QtGui.QWidget):
             self.message = "You did not choose a file \n Please check again!"
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("red"))
-            self.textEdit.insertPlainText(self.message)        
+            self.textEdit.insertPlainText(self.message)
+
         #This is for seeing the var type : non str
         #print self.ExcelSheet 
         
@@ -277,6 +283,7 @@ class Ui_MainWindow(QtGui.QWidget):
         #print test   
         #print len(self.ValVar)
         #return self.VarTemp
+
 
     def load_config(self):
         self.ConfigFile = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.cfg')
@@ -287,6 +294,8 @@ class Ui_MainWindow(QtGui.QWidget):
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("green"))
             self.textEdit.insertPlainText(self.message)
+            self.pushButton_3.setEnabled(True)
+            self.pushButton_4.setEnabled(True)
         else:
             self.message = ("You did not choose a correct Config File \n Please Check !")
             self.textEdit.clear()
@@ -296,6 +305,7 @@ class Ui_MainWindow(QtGui.QWidget):
         """ Caling PyCan_Exec from here """
         #self.VarTemp = App_BackEnd.Py_CANoe()
         #print self.VarTemp.PyCan_Exec(self.ConfigFile)
+
 
     def generate_script(self):
         """
@@ -311,7 +321,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.file.close()"""
 
         self.inst = App_BackEnd.Py_CANoe()
-        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar,self.envVar,self.valVar)
+        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
 
         self.message = ("Script generated successfully.")
         
@@ -319,9 +329,13 @@ class Ui_MainWindow(QtGui.QWidget):
         self.textEdit.setTextColor(QtGui.QColor("green"))
         self.textEdit.insertPlainText(self.message)
 
-    def call_scriptPy(self):     
+        name = QtGui.QFileDialog.getSaveFileName(self,'Save File')
+
+
+    def call_scriptPy(self):
+
         self.message = ("Your Test will start in minute! Please wait a little ^_^ ...")
-        
+
         self.textEdit.clear()
         self.textEdit.setTextColor(QtGui.QColor("Blue"))
         self.textEdit.insertPlainText(self.message)
@@ -335,6 +349,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.textEdit.setTextColor(QtGui.QColor("Blue"))
         self.textEdit.insertPlainText(self.message)
 
+
     def close_application(self):
         choice = QtGui.QMessageBox.question(self, 'NOTICE',"Are you sure you want Exit?", 
                                             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
@@ -342,6 +357,7 @@ class Ui_MainWindow(QtGui.QWidget):
             sys.exit()
         else:
             pass
+
 
     def test_passed(self):
         self.state = self.radioButton.isChecked()
@@ -351,6 +367,7 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
+
     def test_notPassed(self):
         self.state = self.radioButton_2.isChecked()
         if self.state == True:
@@ -359,20 +376,20 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
+
     def ValueChange(self):
         self.message = ("current value:"+str(self.spinBox.value()))
         for i in range(0,self.spinBox.value()):
             self.comboBox.addItem(_fromUtf8(""))
             self.comboBox.setItemText(i, _translate("MainWindow", "Test %d"%(i+1), None))
 
+
     def ScndSheet(self,index):
         print ("Current index:",(index+1))
         self.InstVar = App_BackEnd.ExcelPy()
-        self.envVar = self.InstVar.ParseSSheet(str(self.ExcelSheet),index+1)[0]
-        self.valVar = self.InstVar.ParseSSheet(str(self.ExcelSheet),index+1)[1]
-        self.pushButton_3.setEnabled(True)
-        self.pushButton_4.setEnabled(True)
-
+        self.envVar = self.InstVar.ParseSSheet(str(self.ExcelSheet),(index+1))[0]
+        self.valVar = self.InstVar.ParseSSheet(str(self.ExcelSheet),(index+1))[1]
+        
         print self.envVar
         print self.valVar
 
@@ -440,4 +457,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
