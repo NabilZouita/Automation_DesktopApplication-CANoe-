@@ -29,7 +29,6 @@ class Ui_MainWindow(QtGui.QWidget):
     
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(407, 300)
-        MainWindow.setWindowIcon(QtGui.QIcon('python_logo.png'))
         
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
@@ -66,6 +65,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton_3.setGeometry(QtCore.QRect(10, 55, 81, 23))
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
         self.pushButton_3.setEnabled(False)
+        self.pushButton_3.setStatusTip("Generate & Save")
         self.pushButton_3.clicked.connect(self.generate_script)
         
         self.pushButton_4 = QtGui.QPushButton(self.widget)
@@ -238,6 +238,8 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.actionAbout_this_App = QtGui.QAction(MainWindow)
         self.actionAbout_this_App.setObjectName(_fromUtf8("actionAbout_this_App"))
+        self.actionAbout_this_App.setStatusTip("App Summary !")
+        self.actionAbout_this_App.triggered.connect(self.summary_app)
         
         self.actionAbout = QtGui.QAction(MainWindow)
         self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
@@ -333,7 +335,9 @@ class Ui_MainWindow(QtGui.QWidget):
         self.textEdit.setTextColor(QtGui.QColor("green"))
         self.textEdit.insertPlainText(self.message)
 
-        #name = QtGui.QFileDialog.getSaveFileName(self,'Save File')
+        name = QtGui.QFileDialog.getSaveFileName(self,'Generate & Save !')
+        file = open(name,'w')
+        file.close()
 
 
     def call_scriptPy(self):
@@ -354,13 +358,6 @@ class Ui_MainWindow(QtGui.QWidget):
         self.textEdit.insertPlainText(self.message)
 
 
-    def close_application(self):
-        choice = QtGui.QMessageBox.question(self, 'NOTICE',"Are you sure you want Exit?", 
-                                            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
-        if choice == QtGui.QMessageBox.Yes:
-            sys.exit()
-        else:
-            pass
 
 
     def test_passed(self):
@@ -391,6 +388,7 @@ class Ui_MainWindow(QtGui.QWidget):
     def SecondSheet(self,index):
         #self.keys = True
         print ("Current index:",(index+1))
+        
         self.InstVar = App_BackEnd.ExcelPy()
         self.envVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index+1))[0]
         self.valVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index+1))[1]
@@ -401,6 +399,24 @@ class Ui_MainWindow(QtGui.QWidget):
         self.instVar = App_BackEnd.Py_CANoe()
         self.instVar.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar,self.envVar,self.valVar,key="True")
 
+
+    def close_application(self):
+        choice = QtGui.QMessageBox.question(self, 'NOTICE',"Are you sure ?", 
+                                            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if choice == QtGui.QMessageBox.Yes:
+            sys.exit()
+        else:
+            pass
+
+
+    def summary_app(self):
+        
+        MainWindow = QtGui.QDialog()
+        ui = Ui_MainWindow()
+        MainWindow.exec_()
+        '''
+        self.textedit = QtGui.QTextEdit()
+        MainWindow.setCentralWidget(self.textedit)'''
 
 
     def retranslateUi(self, MainWindow):
@@ -465,5 +481,7 @@ if __name__ == "__main__":
     MainWindow = QtGui.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    MainWindow.setWindowIcon(QtGui.QIcon('python_logo.png'))
+    MainWindow.setWindowTitle("PFE2019_AltranTunisie_IHM")
     MainWindow.show()
     sys.exit(app.exec_())
