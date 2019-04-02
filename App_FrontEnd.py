@@ -322,7 +322,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.file.close()"""
 
         self.inst = App_BackEnd.Py_CANoe()
-        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar,self.envVar,self.valVar)
+        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar,None,None)
 
         self.message = ("Script generated successfully.")
         
@@ -385,7 +385,8 @@ class Ui_MainWindow(QtGui.QWidget):
             self.comboBox.setItemText(i, _translate("MainWindow", "Test %d"%(i+1), None))
 
 
-    def SecondSheet(self,index):
+    def SecondSheet(self,index,key):
+        key = True
         print ("Current index:",(index+1))
         self.InstVar = App_BackEnd.ExcelPy()
         self.envVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index+1))[0]
@@ -393,6 +394,10 @@ class Ui_MainWindow(QtGui.QWidget):
         
         print self.envVar
         print self.valVar
+
+        self.intVar = App_BackEnd.Py_CANoe()
+        self.testVar = self.intVar.Script_Editor(None,None,None,self.envVar,self.valVar)
+
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
