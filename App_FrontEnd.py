@@ -26,8 +26,7 @@ except AttributeError:
 
 class Ui_MainWindow(QtGui.QWidget):
     def setupUi(self, MainWindow):
-        #self.ExcelSheet = None
-
+    
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(407, 300)
         MainWindow.setWindowIcon(QtGui.QIcon('python_logo.png'))
@@ -78,6 +77,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.verticalLayout.addWidget(self.widget)
 
         ########### Added Features in GUI ###########
+
         self.verticalLayoutWidget_2 = QtGui.QWidget(self.frame)
         self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(190, 0, 181, 131))
         self.verticalLayoutWidget_2.setObjectName(_fromUtf8("verticalLayoutWidget_2"))
@@ -112,7 +112,9 @@ class Ui_MainWindow(QtGui.QWidget):
         #self.textEdit.clicked.connect(self.TextEditor)
         
         self.horizontalLayout.addWidget(self.widget_3)
+        
         ############ RadioButtons Layout Code ###########
+
         self.widget_2 = QtGui.QWidget(self.frame)
         self.widget_2.setGeometry(QtCore.QRect(190, 0, 179, 71))
         self.widget_2.setObjectName(_fromUtf8("widget_2"))
@@ -140,6 +142,8 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.widget_4 = QtGui.QWidget(self.verticalLayoutWidget_3)
         self.widget_4.setObjectName(_fromUtf8("widget_4"))
+
+        ########## ComboBox Layout Code ###########
         
         self.comboBox = QtGui.QComboBox(self.widget_4)
         self.comboBox.setGeometry(QtCore.QRect(10, 0.75, 91, 22))
@@ -182,6 +186,8 @@ class Ui_MainWindow(QtGui.QWidget):
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
         """
+        ######## The End ############## 
+
         self.spinBox = QtGui.QSpinBox(self.widget_4)
         self.spinBox.setGeometry(QtCore.QRect(110, 0.75, 42, 22))
         self.spinBox.setObjectName(_fromUtf8("spinBox"))
@@ -189,10 +195,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.spinBox.valueChanged.connect(self.ValueChange)
 
         self.verticalLayout_3.addWidget(self.widget_4)
-        
-        ############ ComboBox Layout code ##########
 
-        ############ The End #############
 
         MainWindow.setCentralWidget(self.centralWidget)
         
@@ -330,7 +333,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.textEdit.setTextColor(QtGui.QColor("green"))
         self.textEdit.insertPlainText(self.message)
 
-        name = QtGui.QFileDialog.getSaveFileName(self,'Save File')
+        #name = QtGui.QFileDialog.getSaveFileName(self,'Save File')
 
 
     def call_scriptPy(self):
@@ -385,8 +388,8 @@ class Ui_MainWindow(QtGui.QWidget):
             self.comboBox.setItemText(i, _translate("MainWindow", "Test %d"%(i+1), None))
 
 
-    def SecondSheet(self,index,key):
-        key = True
+    def SecondSheet(self,index):
+        #self.keys = True
         print ("Current index:",(index+1))
         self.InstVar = App_BackEnd.ExcelPy()
         self.envVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index+1))[0]
@@ -395,8 +398,9 @@ class Ui_MainWindow(QtGui.QWidget):
         print self.envVar
         print self.valVar
 
-        self.intVar = App_BackEnd.Py_CANoe()
-        self.testVar = self.intVar.Script_Editor(None,None,None,self.envVar,self.valVar)
+        self.instVar = App_BackEnd.Py_CANoe()
+        self.instVar.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar,self.envVar,self.valVar,key="True")
+
 
 
     def retranslateUi(self, MainWindow):
