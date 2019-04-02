@@ -101,7 +101,9 @@ class Py_CANoe:
         self.file.close()
 
     def Script_SEditor(self):
-        pass
+        self.key = True
+        
+
 
     def PyCan_Exec(self,path):
         self.root = CANoe()
