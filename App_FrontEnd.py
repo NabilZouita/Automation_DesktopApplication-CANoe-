@@ -327,7 +327,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.file.close()"""
 
         self.inst = App_BackEnd.Py_CANoe()
-        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar,None,None)
+        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
 
         self.message = ("Script generated successfully.")
         
@@ -340,16 +340,24 @@ class Ui_MainWindow(QtGui.QWidget):
         file.close()
 
 
-    def call_scriptPy(self):
-
+    def call_scriptPy(self,**keywords):
+        
         self.message = ("Your Test will start in minute! Please wait a little ^_^ ...")
 
         self.textEdit.clear()
         self.textEdit.setTextColor(QtGui.QColor("Blue"))
         self.textEdit.insertPlainText(self.message)
-  
+        '''  
         self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
-        subprocess.call(["python",str(self.PyScript)])
+        subprocess.call(["python",str(self.PyScript)])'''
+
+        if (callBool == True):
+            self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
+            subprocess.call(["python",str(self.PyScript)])
+        else:
+            self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
+            subprocess.call(["python",str(self.PyScript)])
+
 
         self.message = ("Execution started ! Please check CANoe")
 
@@ -387,18 +395,19 @@ class Ui_MainWindow(QtGui.QWidget):
 
     def SecondSheet(self,index):
         #self.keys = True
-        print ("Current index:",(index+1))
-        
+        print ("Current index:",((index)+1))
         self.InstVar = App_BackEnd.ExcelPy()
-        self.envVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index+1))[0]
-        self.valVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index+1))[1]
+        self.envVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),((index)+1))[0]
+        self.valVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),((index)+1))[1]
         
         print self.envVar
         print self.valVar
 
         self.instVar = App_BackEnd.Py_CANoe()
-        self.instVar.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar,self.envVar,self.valVar,key="True")
+        self.instVar.Script_SEditor(self.envVar,self.valVar)
 
+        bolly = True
+        return bolly
 
     def close_application(self):
         choice = QtGui.QMessageBox.question(self, 'NOTICE',"Are you sure ?", 
