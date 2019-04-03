@@ -84,7 +84,7 @@ class Py_CANoe:
     def __init__(self):
         pass
     # Checking path will be done in Python_CANoe.py
-    def Script_Editor(self,ConfigFile=None,EnvVar=None,EnvVal=None,envVar=None,valVar=None,**keywords):
+    def Script_Editor(self,ConfigFile=None,EnvVar=None,EnvVal=None):
         self.file = open("Script.py","w")
         
         self.file.write("from Python_CANoe import CANoe \n")
@@ -94,20 +94,24 @@ class Py_CANoe:
         
         for i in range(len(EnvVal)):
             self.file.write("var.set_EnvVar('%s',%s) \n"%(EnvVar[i],EnvVal[i]))
-        
+        '''
         if ('key' in keywords):
             for i in range(len(envVar)):
                 self.file.write("var.set_EnvVar('%s',%s) \n"%(envVar[i],valVar[i]))
         else:
             pass
-        
+        '''
 
         self.file.close()
 
 
-    def Script_SEditor(self):
-        pass
-        
+    def Script_SEditor(self,envVar=None,valVar=None):
+        self.file = open("Script.py","w")
+
+        for i in range(len(envVar)):
+            self.file.write("var.set_EnvVar('%s',%s) \n"%(envVar[i],valVar[i]))
+
+        self.file.close()        
 
 
     def PyCan_Exec(self,path):
