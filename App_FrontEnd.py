@@ -410,13 +410,47 @@ class Ui_MainWindow(QtGui.QWidget):
 
 
     def summary_app(self):
-        
+        message_box = QtGui.QMessageBox()
+        message_box.setWindowTitle("Test")
+        message_box.setText("Testing")
+        message_box.setDetailedText(open("Test.txt","r"))
+
+        message_box.setStandardButtons(QtGui.QMessageBox.Ok)
+        message_box.setDefaultButton(QtGui.QMessageBox.Ok)
+        message_box.setEscapeButton(QtGui.QMessageBox.Ok)
+
+        message_box.exec_()
+
+        '''
         MainWindow = QtGui.QDialog()
         ui = Ui_MainWindow()
         MainWindow.exec_()
         '''
+        '''
         self.textedit = QtGui.QTextEdit()
         MainWindow.setCentralWidget(self.textedit)'''
+
+        '''
+        MainWindow = QtGui.QDialog()
+        ui = Ui_MainWindow()
+        with open("Test.txt","r") as f:
+            for line in f:
+                print line.strip()
+
+        MainWindow.exec_()'''
+
+        '''
+        MainWindow = QtGui.QDialog()
+        ui = Ui_MainWindow()
+        #ui = QtGui.QPlainTextEdit()
+        text = open("Test.txt").read()
+        ui.setPlainText(text)
+        with open("Test.txt","r") as f:
+            for line in f:
+                print line.strip()
+
+
+        MainWindow.show()'''
 
 
     def retranslateUi(self, MainWindow):
