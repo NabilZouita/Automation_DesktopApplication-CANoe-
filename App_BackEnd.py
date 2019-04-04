@@ -108,6 +108,11 @@ class Py_CANoe:
     def Script_SEditor(self,envVar=None,valVar=None):
         self.file = open("Script.py","w")
 
+        self.file.write("from Python_CANoe import CANoe \n")
+        self.file.write("var = CANoe() \n")
+        #self.file.write("var.stop_Measurement() \n")
+        #self.file.write("var.start_Measurement() \n")
+
         for i in range(len(envVar)):
             self.file.write("var.set_EnvVar('%s',%s) \n"%(envVar[i],valVar[i]))
 
