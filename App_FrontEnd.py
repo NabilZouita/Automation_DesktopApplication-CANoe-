@@ -423,7 +423,7 @@ class Ui_MainWindow(QtGui.QWidget):
         message_box = QtGui.QMessageBox()
         message_box.setWindowTitle("Test")
         message_box.setText("Testing")
-        message_box.setDetailedText(open("Test.txt","r"))
+        message_box.setDetailedText("PFE2019_AltranTunisie_IHM")
 
         message_box.setStandardButtons(QtGui.QMessageBox.Ok)
         message_box.setDefaultButton(QtGui.QMessageBox.Ok)
