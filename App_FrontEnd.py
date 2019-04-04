@@ -347,16 +347,18 @@ class Ui_MainWindow(QtGui.QWidget):
         self.textEdit.clear()
         self.textEdit.setTextColor(QtGui.QColor("Blue"))
         self.textEdit.insertPlainText(self.message)
-        '''  
+        
         self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
-        subprocess.call(["python",str(self.PyScript)])'''
+        subprocess.call(["python",str(self.PyScript)])
 
+        '''
         if (callBool == True):
             self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
             subprocess.call(["python",str(self.PyScript)])
         else:
             self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
             subprocess.call(["python",str(self.PyScript)])
+        '''
 
 
         self.message = ("Execution started ! Please check CANoe")
@@ -372,7 +374,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.state = self.radioButton.isChecked()
         if self.state == True:
             self.inst = App_BackEnd.ExcelPy()
-            self.inst.LogEditorPass(str(self.ExcelSheet),0)
+            self.inst.LogEditorPass(str(self.ExcelSheet),self.varTemp)
         else:
             pass
 
@@ -381,7 +383,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.state = self.radioButton_2.isChecked()
         if self.state == True:
             self.inst = App_BackEnd.ExcelPy()
-            self.inst.LogEditorNotPass(str(self.ExcelSheet),0)
+            self.inst.LogEditorNotPass(str(self.ExcelSheet),self.varTemp)
         else:
             pass
 
@@ -395,6 +397,7 @@ class Ui_MainWindow(QtGui.QWidget):
 
     def SecondSheet(self,index):
         #self.keys = True
+        self.varTemp = index + 1
         print ("Current index:",((index)+1))
         self.InstVar = App_BackEnd.ExcelPy()
         self.envVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),((index)+1))[0]
@@ -406,8 +409,6 @@ class Ui_MainWindow(QtGui.QWidget):
         self.instVar = App_BackEnd.Py_CANoe()
         self.instVar.Script_SEditor(self.envVar,self.valVar)
 
-        bolly = True
-        return bolly
 
     def close_application(self):
         choice = QtGui.QMessageBox.question(self, 'NOTICE',"Are you sure ?", 
