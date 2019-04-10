@@ -105,7 +105,7 @@ class Py_CANoe:
         self.file.close()
 
 
-    def Script_SEditor(self,envVar=None,valVar=None):
+    def SScript_Editor(self,envVar=None,valVar=None):
         self.file = open("Script.py","w")
 
         self.file.write("from Python_CANoe import CANoe \n")
