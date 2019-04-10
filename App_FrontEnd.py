@@ -339,6 +339,9 @@ class Ui_MainWindow(QtGui.QWidget):
         file = open(name,'w')
         file.close()
 
+        self.counter = 0
+
+
 
     def call_scriptPy(self,**keywords):
         
@@ -348,8 +351,17 @@ class Ui_MainWindow(QtGui.QWidget):
         self.textEdit.setTextColor(QtGui.QColor("Blue"))
         self.textEdit.insertPlainText(self.message)
         
+        if (self.counter == 0):
+            self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File', '*.py')
+            subprocess.call(["python",str(self.PyScript)])
+            
+        else:
+            subprocess.call(["python","Script.py"])
+
+
+        '''    
         self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
-        subprocess.call(["python",str(self.PyScript)])
+        subprocess.call(["python",str(self.PyScript)])'''
 
         '''
         if (callBool == True):
@@ -407,7 +419,9 @@ class Ui_MainWindow(QtGui.QWidget):
         print self.valVar
 
         self.instVar = App_BackEnd.Py_CANoe()
-        self.instVar.Script_SEditor(self.envVar,self.valVar)
+        self.instVar.SScript_Editor(self.envVar,self.valVar)
+
+        self.counter = 1
 
 
     def close_application(self):
