@@ -76,7 +76,7 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.verticalLayout.addWidget(self.widget)
 
-        ########### Added Features in GUI ###########
+        ########### Design Text Edit ###########
 
         self.verticalLayoutWidget_2 = QtGui.QWidget(self.frame)
         self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(190, 0, 181, 131))
@@ -192,7 +192,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.spinBox.setGeometry(QtCore.QRect(110, 0.75, 42, 22))
         self.spinBox.setObjectName(_fromUtf8("spinBox"))
         self.spinBox.setMinimum(0)
-        self.spinBox.valueChanged.connect(self.ValueChange)
+        #self.spinBox.valueChanged.connect(self.ValueChange)
 
         self.verticalLayout_3.addWidget(self.widget_4)
 
@@ -239,10 +239,12 @@ class Ui_MainWindow(QtGui.QWidget):
         self.actionAbout_this_App = QtGui.QAction(MainWindow)
         self.actionAbout_this_App.setObjectName(_fromUtf8("actionAbout_this_App"))
         self.actionAbout_this_App.setStatusTip("App Summary !")
-        self.actionAbout_this_App.triggered.connect(self.summary_app)
+        self.actionAbout_this_App.triggered.connect(self.app_summary)
         
         self.actionAbout = QtGui.QAction(MainWindow)
         self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
+        self.actionAbout.setStatusTip("App documentation !")
+        self.actionAbout.triggered.connect(self.app_documentation)
         
         self.menuFile.addAction(self.actionOpen_Sheet)
         self.menuFile.addAction(self.actionOpen_Config)
@@ -273,6 +275,8 @@ class Ui_MainWindow(QtGui.QWidget):
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("green"))
             self.textEdit.insertPlainText(self.message)
+
+            callVar = self.ValueChange()
         except IOError:
             self.message = "You did not choose a file \n Please check again!"
             self.textEdit.clear()
@@ -402,7 +406,14 @@ class Ui_MainWindow(QtGui.QWidget):
 
     def ValueChange(self):
         self.message = ("current value:"+str(self.spinBox.value()))
-        for i in range(0,self.spinBox.value()):
+
+        """ Trying to get number of sheets automatically """
+        self.inst = App_BackEnd.ExcelPy()
+        TempRes = self.inst.GetNumbSheets(str(self.ExcelSheet))
+        print TempRes
+
+        #Previous Value before change is "self.spinBox.value()"
+        for i in range(0,TempRes):
             self.comboBox.addItem(_fromUtf8(""))
             self.comboBox.setItemText(i, _translate("MainWindow", "Test %d"%(i+1), None))
 
@@ -433,7 +444,7 @@ class Ui_MainWindow(QtGui.QWidget):
             pass
 
 
-    def summary_app(self):
+    def app_summary(self):
         message_box = QtGui.QMessageBox()
         message_box.setIcon(message_box.Information)
         message_box.setWindowTitle("About this Application")
@@ -478,6 +489,13 @@ class Ui_MainWindow(QtGui.QWidget):
 
 
         MainWindow.show()'''
+
+    def app_documentation(self):
+        TextFile = QtGui.QDialog()
+
+        text = open("test.txt","r").read()
+
+        TextFile.exec_()
 
 
     def retranslateUi(self, MainWindow):
