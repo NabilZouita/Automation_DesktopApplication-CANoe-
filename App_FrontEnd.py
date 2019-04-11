@@ -34,7 +34,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
         
         self.frame = QtGui.QFrame(self.centralWidget)
-        self.frame.setGeometry(QtCore.QRect(20, 10, 381, 241))
+        self.frame.setGeometry(QtCore.QRect(20, 10, 421, 311))
         self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtGui.QFrame.Raised)
         self.frame.setObjectName(_fromUtf8("frame"))
@@ -435,13 +435,16 @@ class Ui_MainWindow(QtGui.QWidget):
 
     def summary_app(self):
         message_box = QtGui.QMessageBox()
-        message_box.setWindowTitle("Test")
-        message_box.setText("Testing")
-        message_box.setDetailedText("PFE2019_AltranTunisie_IHM")
+        message_box.setIcon(message_box.Information)
+        message_box.setWindowTitle("About this Application")
+        message_box.setWindowIcon(QtGui.QIcon('python_logo.png'))
+        message_box.setText("PFE2019_AltranTunisie_IHM")
+        message_box.setInformativeText("Automating CANoe process \nThis was done as End of Studies Project")
+        #message_box.setDetailedText("PFE2019_AltranTunisie_IHM")
 
-        message_box.setStandardButtons(QtGui.QMessageBox.Ok)
-        message_box.setDefaultButton(QtGui.QMessageBox.Ok)
-        message_box.setEscapeButton(QtGui.QMessageBox.Ok)
+        #message_box.setStandardButtons(QtGui.QMessageBox.Ok)
+        #message_box.setDefaultButton(QtGui.QMessageBox.Ok)
+        #message_box.setEscapeButton(QtGui.QMessageBox.Ok)
 
         message_box.exec_()
 
@@ -530,7 +533,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.actionSave_As.setText(_translate("MainWindow", "Save As", None))
         self.actionQuit.setText(_translate("MainWindow", "Quit", None))
         self.actionAbout_this_App.setText(_translate("MainWindow", "About this App", None))
-        self.actionAbout.setText(_translate("MainWindow", "About...", None))
+        self.actionAbout.setText(_translate("MainWindow", "Documentation", None))
 
 
 if __name__ == "__main__":
