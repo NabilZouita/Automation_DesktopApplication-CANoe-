@@ -20,6 +20,12 @@ class ExcelPy:
             raise RuntimeError("You have entered a wrong File ! Please Check")
         else:
             raise RuntimeError("Thank you!")
+
+    def GetNumbSheets(self,ShPath):
+        self.book = xlrd.open_workbook(ShPath)
+        self.res = self.book.nsheets()
+
+        return self.res
         
     def ParseFSheet(self,PathExc):
         #self.temp = os.path.splitext(PathExc)
