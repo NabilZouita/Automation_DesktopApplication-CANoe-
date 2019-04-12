@@ -23,7 +23,7 @@ class ExcelPy:
 
     def GetNumbSheets(self,ShPath):
         self.book = xlrd.open_workbook(ShPath)
-        self.res = self.book.nsheets()
+        self.res = len(self.book.sheet_names())
 
         return self.res
         
