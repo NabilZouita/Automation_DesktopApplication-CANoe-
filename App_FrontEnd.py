@@ -41,7 +41,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.frame.setObjectName(_fromUtf8("frame"))
         
         self.verticalLayoutWidget = QtGui.QWidget(self.frame)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 261, 181))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 270, 181))
         self.verticalLayoutWidget.setObjectName(_fromUtf8("verticalLayoutWidget"))
         
         self.verticalLayout = QtGui.QVBoxLayout(self.verticalLayoutWidget)
@@ -50,21 +50,23 @@ class Ui_MainWindow(QtGui.QWidget):
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         
         self.widget = QtGui.QWidget(self.verticalLayoutWidget)
-        """ Block of code added of size policy """
+
+        """ Code added : size policy """
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
 
         self.widget.setSizePolicy(sizePolicy)
-        """ It ends here """
+        """ Size Policy : End """
 
         self.widget.setObjectName(_fromUtf8("widget"))
-        
+
+        """ Block of code : PushButton1 Layout """    
         self.pushButton = QtGui.QPushButton(self.widget)
         
         self.pushButton.setGeometry(QtCore.QRect(10, 10, 111, 61))
-        """ Block of code : PushButton Layout """
+    
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
         
         sizePolicy.setHorizontalStretch(0)
@@ -81,16 +83,15 @@ class Ui_MainWindow(QtGui.QWidget):
         font.setWeight(75)
         
         self.pushButton.setFont(font)
-        self.pushButton.setDefault(True)
-        """ End of Code """
-
+        self.pushButton.setDefault(True)   
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.pushButton.clicked.connect(self.load_sheet)
+        """ PushButton1 : End """
 
-        self.pushButton_2 = QtGui.QPushButton(self.widget)
+        """ PushButton2 : Design Layout begin """
+        self.pushButton_2 = QtGui.QPushButton(self.widget) 
+        self.pushButton_2.setGeometry(QtCore.QRect(10, 90, 111, 61))
         
-        self.pushButton_2.setGeometry(QtCore.QRect(10, 110, 111, 61))
-        """ PushButton2 : Layout Design """
         font = QtGui.QFont()
         
         font.setFamily(_fromUtf8("Arial"))
@@ -100,33 +101,68 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.pushButton_2.setFont(font)
         self.pushButton_2.setDefault(True)
-        """ End of Code """
-
+        
         self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
         self.pushButton_2.clicked.connect(self.load_config)
-             
+        """ PushButton2 Layout Design : End """
+
+        """ PushButton3 Layout Design : Begin """
         self.pushButton_3 = QtGui.QPushButton(self.widget)
+        self.pushButton_3.setGeometry(QtCore.QRect(138, 10, 111, 61))
+
+        font = QtGui.QFont()
         
-        self.pushButton_3.setGeometry(QtCore.QRect(10, 55, 81, 23))
+        font.setFamily(_fromUtf8("Arial"))
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        
+        self.pushButton_3.setFont(font)
+        self.pushButton_3.setDefault(True)
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
         self.pushButton_3.setEnabled(False)
         self.pushButton_3.setStatusTip("Generate & Save")
         self.pushButton_3.clicked.connect(self.generate_script)
-        
+        """ PushButton 3 Layout Design : End"""
+
+        """ PushButton 4 Layout Design : Begin """
         self.pushButton_4 = QtGui.QPushButton(self.widget)
         
-        self.pushButton_4.setGeometry(QtCore.QRect(10, 80, 81, 23))
+        self.pushButton_4.setGeometry(QtCore.QRect(138, 90, 111, 61))
+
+        font = QtGui.QFont()
+        
+        font.setFamily(_fromUtf8("Arial"))
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        
+        self.pushButton_4.setFont(font)
+        self.pushButton_4.setDefault(True)
         self.pushButton_4.setObjectName(_fromUtf8("pushButton_4"))
         self.pushButton_4.setEnabled(False)
         self.pushButton_4.clicked.connect(self.call_scriptPy)
+        """ PushButton 4 Layout Design : End """
+
+        ########### Layout Two lines : Begin #############
+        self.line = QtGui.QFrame(self.widget)
+        self.line.setGeometry(QtCore.QRect(0, 80, 261, 20))
+        self.line.setLineWidth(2)
+        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line.setObjectName(_fromUtf8("line"))
         
+        self.line_2 = QtGui.QFrame(self.widget)
+        self.line_2.setGeometry(QtCore.QRect(120, 0, 20, 181))
+        self.line_2.setLineWidth(2)
+        self.line_2.setFrameShape(QtGui.QFrame.VLine)
+        self.line_2.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line_2.setObjectName(_fromUtf8("line_2"))
+        ########### Two lines Edit code : End #############        
         self.verticalLayout.addWidget(self.widget)
-
-        ########### Design Text Edit ###########
-
+        ########### Design RadioButton : Begin ###########
         self.verticalLayoutWidget_2 = QtGui.QWidget(self.frame)
         
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(190, 0, 181, 131))
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(300, 0, 181, 71))
         self.verticalLayoutWidget_2.setObjectName(_fromUtf8("verticalLayoutWidget_2"))
         
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.verticalLayoutWidget_2)
@@ -134,7 +170,82 @@ class Ui_MainWindow(QtGui.QWidget):
         self.verticalLayout_2.setMargin(11)
         self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+        ############ RadioButtons Layout Code ###########
+        self.widget_2 = QtGui.QWidget(self.verticalLayoutWidget_2)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.widget_2.sizePolicy().hasHeightForWidth())
+
+        self.widget_2.setSizePolicy(sizePolicy)
+        self.widget_2.setObjectName(_fromUtf8("widget_2"))
+        ######## Layout : RadioButton1 ##########
+        self.radioButton = QtGui.QRadioButton(self.widget_2)
+        
+        self.radioButton.setGeometry(QtCore.QRect(20, 16, 82, 21))
+        
+        font = QtGui.QFont()
+        
+        font.setFamily(_fromUtf8("Arial"))
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        
+        self.radioButton.setFont(font)
+        self.radioButton.setObjectName(_fromUtf8("radioButton"))
+        self.radioButton.clicked.connect(self.test_passed)
+        ######## The End : RadioButton1 Design Layout ##########
+        
+        ######## RadioButton2 Design Layout : Begin ########
+        self.radioButton_2 = QtGui.QRadioButton(self.widget_2)
+        
+        self.radioButton_2.setGeometry(QtCore.QRect(20, 30, 111, 20))
+
+        font = QtGui.QFont()
+        
+        font.setFamily(_fromUtf8("Arial"))
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        
+        self.radioButton_2.setFont(font)
+
+        self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
+        self.radioButton_2.clicked.connect(self.test_notPassed)
+        ######## The End : RadioButton2 #########
+
+        ############ The End : RadioButton Layout code ##############
+
+        ####### Design Layout Text Edit : Begin #########
+        self.horizontalLayoutWidget = QtGui.QWidget(self.frame)
+        
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 190, 461, 111))
+        self.horizontalLayoutWidget.setObjectName(_fromUtf8("horizontalLayoutWidget"))
+        
+        self.horizontalLayout = QtGui.QHBoxLayout(self.horizontalLayoutWidget)
+        
+        self.horizontalLayout.setMargin(11)
+        self.horizontalLayout.setSpacing(6)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        
+        self.textEdit = QtGui.QTextEdit(self.horizontalLayoutWidget)
+        
+        font = QtGui.QFont()
+        
+        font.setFamily(_fromUtf8("Arial"))
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        
+        self.textEdit.setFont(font)
+        self.textEdit.setObjectName(_fromUtf8("textEdit"))
+        
+        self.horizontalLayout.addWidget(self.textEdit)
+        ###### Text Edit Design Layout : End ######"" 
+
+        """ Deleted Text Edit Layout
         self.horizontalLayoutWidget = QtGui.QWidget(self.frame)
         
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 140, 371, 91))
@@ -164,31 +275,12 @@ class Ui_MainWindow(QtGui.QWidget):
         #self.textEdit.clicked.connect(self.TextEditor)
         
         self.horizontalLayout.addWidget(self.widget_3)
+        Here Ends the deleted part """
         
-        ############ RadioButtons Layout Code ###########
-
-        self.widget_2 = QtGui.QWidget(self.frame)
-        
-        self.widget_2.setGeometry(QtCore.QRect(190, 0, 179, 71))
-        self.widget_2.setObjectName(_fromUtf8("widget_2"))
-        
-        self.radioButton = QtGui.QRadioButton(self.widget_2)
-        
-        self.radioButton.setGeometry(QtCore.QRect(20, 20, 82, 17))
-        self.radioButton.setObjectName(_fromUtf8("radioButton"))
-        self.radioButton.clicked.connect(self.test_passed)
-        
-        self.radioButton_2 = QtGui.QRadioButton(self.widget_2)
-        
-        self.radioButton_2.setGeometry(QtCore.QRect(20, 50, 82, 17))
-        self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
-        self.radioButton_2.clicked.connect(self.test_notPassed)
-
-        ############ The End ##############
-
+        ########## ComboBox + LCD + ProgressBar Layout : Begin ###################
         self.verticalLayoutWidget_3 = QtGui.QWidget(self.frame)
         
-        self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(189, 80, 181, 61))
+        self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(300, 80, 181, 101))
         self.verticalLayoutWidget_3.setObjectName(_fromUtf8("verticalLayoutWidget_3"))
         
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.verticalLayoutWidget_3)
@@ -201,11 +293,20 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.widget_4.setObjectName(_fromUtf8("widget_4"))
 
-        ########## ComboBox Layout Code ###########
-        
+        ############## ComboBox Layout Code ##################
         self.comboBox = QtGui.QComboBox(self.widget_4)
         
-        self.comboBox.setGeometry(QtCore.QRect(10, 0.75, 91, 22))
+        self.comboBox.setGeometry(QtCore.QRect(5, 15, 101, 31))
+
+        font = QtGui.QFont()
+        
+        font.setFamily(_fromUtf8("Arial"))
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        
+        self.comboBox.setFont(font)
+
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
         self.comboBox.currentIndexChanged.connect(self.SecondSheet)  
         """
@@ -245,15 +346,40 @@ class Ui_MainWindow(QtGui.QWidget):
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
         """
-        ######## The End ############## 
+        ######## The End ##############
 
+        ######## Begin QLCDNumber Widget #######
+        """ SpinBox Widget Deleted 
         self.spinBox = QtGui.QSpinBox(self.widget_4)
         
         self.spinBox.setGeometry(QtCore.QRect(110, 0.75, 42, 22))
         self.spinBox.setObjectName(_fromUtf8("spinBox"))
         self.spinBox.setMinimum(0)
-        #self.spinBox.valueChanged.connect(self.ValueChange)
+        #self.spinBox.valueChanged.connect(self.ValueChange)"""
 
+        self.progressBar = QtGui.QProgressBar(self.widget_4)
+        
+        self.progressBar.setGeometry(QtCore.QRect(5, 55, 161, 21))
+        
+        font = QtGui.QFont()
+        
+        font.setFamily(_fromUtf8("Arial"))
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        
+        self.progressBar.setFont(font)
+        self.progressBar.setProperty("value", 24)
+        self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        
+        self.lcdNumber = QtGui.QLCDNumber(self.widget_4)
+        
+        self.lcdNumber.setGeometry(QtCore.QRect(115, 15, 41, 31))
+        self.lcdNumber.setFrameShape(QtGui.QFrame.WinPanel)
+        self.lcdNumber.setDigitCount(3)
+        self.lcdNumber.setObjectName(_fromUtf8("lcdNumber"))
+
+        ######## End : QLCDNumber Widget ############
         self.verticalLayout_3.addWidget(self.widget_4)
 
 
@@ -493,7 +619,7 @@ class Ui_MainWindow(QtGui.QWidget):
 
 
     def ValueChange(self):
-        self.message = ("current value:"+str(self.spinBox.value()))
+        #self.message = ("current value:"+str(self.spinBox.value()))
 
         """ Trying to get number of sheets automatically """
         self.inst = App_BackEnd.ExcelPy()
@@ -660,16 +786,11 @@ class Ui_MainWindow(QtGui.QWidget):
 
 if __name__ == "__main__":
     import sys
-    
     app = QtGui.QApplication(sys.argv)
-    
     MainWindow = QtGui.QMainWindow()
-    
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    
     MainWindow.setWindowIcon(QtGui.QIcon('python_logo.png'))
     MainWindow.setWindowTitle("PFE2019_AltranTunisie_IHM")
     MainWindow.show()
-    
     sys.exit(app.exec_())
