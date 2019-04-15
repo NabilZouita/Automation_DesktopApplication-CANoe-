@@ -67,7 +67,7 @@ class Ui_MainWindow(QtGui.QWidget):
         ######## PushButton1 Layout : Begin ###########    
         self.pushButton = QtGui.QPushButton(self.widget)
         
-        self.pushButton.setGeometry(QtCore.QRect(10, 10, 111, 61))
+        self.pushButton.setGeometry(QtCore.QRect(2, 10, 119, 61))
     
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
         
@@ -87,12 +87,13 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton.setFont(font)
         self.pushButton.setDefault(True)   
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton.setStatusTip("Open & Load Excel Template")
         self.pushButton.clicked.connect(self.load_sheet)
         ######## PushButton1 Layout Design : End #########
 
         ######## PushButton2 Layout Desing : Begin #######
         self.pushButton_2 = QtGui.QPushButton(self.widget) 
-        self.pushButton_2.setGeometry(QtCore.QRect(10, 90, 111, 61))
+        self.pushButton_2.setGeometry(QtCore.QRect(2, 90, 119, 61))
         
         font = QtGui.QFont()
         
@@ -103,8 +104,10 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.pushButton_2.setFont(font)
         self.pushButton_2.setDefault(True)
+        self.pushButton_2.setEnabled(False)
         
         self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
+        self.pushButton_2.setStatusTip("Choose & Load CANoe Configuration")
         self.pushButton_2.clicked.connect(self.load_config)
         ######## PushButton2 Layout Design : End ##########
 
@@ -123,7 +126,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton_3.setDefault(True)
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
         self.pushButton_3.setEnabled(False)
-        self.pushButton_3.setStatusTip("Generate & Save")
+        self.pushButton_3.setStatusTip("Generate & Save Script")
         self.pushButton_3.clicked.connect(self.generate_script)
         """ PushButton 3 Layout Design : End"""
 
@@ -142,6 +145,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton_4.setFont(font)
         self.pushButton_4.setDefault(True)
         self.pushButton_4.setObjectName(_fromUtf8("pushButton_4"))
+        self.pushButton_4.setStatusTip("Execute choosen script")
         self.pushButton_4.setEnabled(False)
         self.pushButton_4.clicked.connect(self.call_scriptPy)
         """ PushButton 4 Layout Design : End """
@@ -197,6 +201,7 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.radioButton.setFont(font)
         self.radioButton.setObjectName(_fromUtf8("radioButton"))
+        self.radioButton.setStatusTip("Conducted Test State : PASS !")
         self.radioButton.clicked.connect(self.test_passed)
         ######## The End : RadioButton1 Design Layout ##########
         
@@ -215,6 +220,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.radioButton_2.setFont(font)
 
         self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
+        self.radioButton_2.setStatusTip("Conducted test state : FAIL !")
         self.radioButton_2.clicked.connect(self.test_notPassed)
 
         self.verticalLayout_2.addWidget(self.widget_2)
@@ -225,7 +231,7 @@ class Ui_MainWindow(QtGui.QWidget):
         ####### Design Layout Text Edit : Begin #########
         self.horizontalLayoutWidget = QtGui.QWidget(self.frame)
         
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 170, 461, 151))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 170, 470, 151))
         self.horizontalLayoutWidget.setObjectName(_fromUtf8("horizontalLayoutWidget"))
         
         self.horizontalLayout = QtGui.QHBoxLayout(self.horizontalLayoutWidget)
@@ -312,6 +318,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.comboBox.setFont(font)
 
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
+        self.comboBox.setStatusTip("Complete list of Tests in the Template")
         self.comboBox.currentIndexChanged.connect(self.SecondSheet)  
         """
         self.comboBox.addItem(_fromUtf8(""))
@@ -375,6 +382,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.progressBar.setFont(font)
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        self.progressBar.setStatusTip("Process state progressing")
         
         self.lcdNumber = QtGui.QLCDNumber(self.widget_4)
         
@@ -382,6 +390,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.lcdNumber.setFrameShape(QtGui.QFrame.WinPanel)
         self.lcdNumber.setDigitCount(3)
         self.lcdNumber.setObjectName(_fromUtf8("lcdNumber"))
+        self.lcdNumber.setStatusTip("The number of Tests available to execute")
 
         ######## End : QLCDNumber Widget ############
         self.verticalLayout_3.addWidget(self.widget_4)
@@ -419,6 +428,8 @@ class Ui_MainWindow(QtGui.QWidget):
         self.actionOpen_Sheet = QtGui.QAction(MainWindow)
         
         self.actionOpen_Sheet.setObjectName(_fromUtf8("actionOpen_Sheet"))
+        self.actionQuit.setShortcut("Ctrl+O")
+        self.actionQuit.setStatusTip("Open & Choose Template !")
         
         self.actionOpen_Config = QtGui.QAction(MainWindow)
         
@@ -491,6 +502,12 @@ class Ui_MainWindow(QtGui.QWidget):
             self.textEdit.insertPlainText(self.message)
 
             comboBox_Var = self.ValueChange()
+
+            self.instVar = App_BackEnd.ExcelPy()
+            self.lcdNumber.display(self.instVar.GetNumbSheets(str(self.ExcelSheet))-1)
+
+            self.pushButton_2.setEnabled(True)
+
         except IOError:
             self.message = "You did not choose a file \n Please check again!"
             
@@ -528,7 +545,6 @@ class Ui_MainWindow(QtGui.QWidget):
             self.textEdit.insertPlainText(self.message)
             
             self.pushButton_3.setEnabled(True)
-            self.pushButton_4.setEnabled(True)
         else:
             self.message = ("You did not choose a correct Config File \n Please Check !")
             
@@ -553,12 +569,10 @@ class Ui_MainWindow(QtGui.QWidget):
             self.file.write("var.set_EnvVar('%s',%s) \n"%(self.EnvVar[i],self.ValVar[i]))
         
         self.file.close()"""
+        self.inst = App_BackEnd.Py_CANoe()
+        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
         try:
-            self.inst = App_BackEnd.Py_CANoe()
-            self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
-
             self.message = ("Script generated successfully.")
-
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("green"))
 
@@ -571,8 +585,10 @@ class Ui_MainWindow(QtGui.QWidget):
 
             self.counter = 0
 
+            self.pushButton_4.setEnabled(True)
+
         except IOError:
-            self.message = "You did not choose a file \n Please check again!"
+            self.message = "You did not save your file \n File will execute automatically!"
             
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("red"))
@@ -580,20 +596,28 @@ class Ui_MainWindow(QtGui.QWidget):
 
 
     def call_scriptPy(self,**keywords):
-        
-        self.message = ("This will take few seconds ! Please wait ^_^ ...")
+        try:
+            self.message = ("This will take few seconds ! Please wait ^_^ ...")
+            self.textEdit.clear()
+            self.textEdit.setTextColor(QtGui.QColor("Blue"))
+            self.textEdit.insertPlainText(self.message)
+            if (self.counter == 0):
+                self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File', '*.py')
+                subprocess.call(["python",str(self.PyScript)])
+            else:
+                subprocess.call(["python","Script.py"])
+                progess_Var = self.ProgressBar()
+        except:
+            self.message = "No script has been choosen \n Please proceed again!"
+            
+            self.textEdit.clear()
+            self.textEdit.setTextColor(QtGui.QColor("red"))
+            self.textEdit.insertPlainText(self.message)
 
+        self.message = ("Execution started ! Please check CANoe")
         self.textEdit.clear()
         self.textEdit.setTextColor(QtGui.QColor("Blue"))
         self.textEdit.insertPlainText(self.message)
-        
-        if (self.counter == 0):
-            self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File', '*.py')
-            progess_Var = self.ProgressBar()
-            subprocess.call(["python",str(self.PyScript)])       
-        else:
-            subprocess.call(["python","Script.py"])
-            progess_Var = self.ProgressBar()
 
 
         '''    
@@ -608,15 +632,6 @@ class Ui_MainWindow(QtGui.QWidget):
             self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
             subprocess.call(["python",str(self.PyScript)])
         '''
-
-
-        self.message = ("Execution started ! Please check CANoe")
-
-        self.textEdit.clear()
-        self.textEdit.setTextColor(QtGui.QColor("Blue"))
-        self.textEdit.insertPlainText(self.message)
-
-
 
 
     def test_passed(self):
@@ -744,7 +759,7 @@ class Ui_MainWindow(QtGui.QWidget):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         
-        self.pushButton.setText(_translate("MainWindow", "Excel Sheet", None))
+        self.pushButton.setText(_translate("MainWindow", "Template Excel", None))
         
         self.pushButton_2.setText(_translate("MainWindow", "Configuration", None))
         
