@@ -33,13 +33,16 @@ class Ui_MainWindow(QtGui.QWidget):
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
         
+        ########## MainFrame Layout Setting: Begin #############
         self.frame = QtGui.QFrame(self.centralWidget)
         
         self.frame.setGeometry(QtCore.QRect(20, 10, 491, 311))
         self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtGui.QFrame.Raised)
         self.frame.setObjectName(_fromUtf8("frame"))
-        
+        ########## MainFrame Layout setting: End ############
+
+        ########## PushButtons Layout Design : Begin ##########
         self.verticalLayoutWidget = QtGui.QWidget(self.frame)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 270, 181))
         self.verticalLayoutWidget.setObjectName(_fromUtf8("verticalLayoutWidget"))
@@ -51,18 +54,17 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.widget = QtGui.QWidget(self.verticalLayoutWidget)
 
-        """ Code added : size policy """
+        ######### Size Policy Layout : Begin #########
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
-
+        ######### Size Policy Layout : End ##########
+        
         self.widget.setSizePolicy(sizePolicy)
-        """ Size Policy : End """
-
         self.widget.setObjectName(_fromUtf8("widget"))
 
-        """ Block of code : PushButton1 Layout """    
+        ######## PushButton1 Layout : Begin ###########    
         self.pushButton = QtGui.QPushButton(self.widget)
         
         self.pushButton.setGeometry(QtCore.QRect(10, 10, 111, 61))
@@ -86,9 +88,9 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton.setDefault(True)   
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.pushButton.clicked.connect(self.load_sheet)
-        """ PushButton1 : End """
+        ######## PushButton1 Layout Design : End #########
 
-        """ PushButton2 : Design Layout begin """
+        ######## PushButton2 Layout Desing : Begin #######
         self.pushButton_2 = QtGui.QPushButton(self.widget) 
         self.pushButton_2.setGeometry(QtCore.QRect(10, 90, 111, 61))
         
@@ -104,9 +106,9 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
         self.pushButton_2.clicked.connect(self.load_config)
-        """ PushButton2 Layout Design : End """
+        ######## PushButton2 Layout Design : End ##########
 
-        """ PushButton3 Layout Design : Begin """
+        ######## PushButton3 Layout Design : Begin #########
         self.pushButton_3 = QtGui.QPushButton(self.widget)
         self.pushButton_3.setGeometry(QtCore.QRect(138, 10, 111, 61))
 
@@ -162,7 +164,7 @@ class Ui_MainWindow(QtGui.QWidget):
         ########### Design RadioButton : Begin ###########
         self.verticalLayoutWidget_2 = QtGui.QWidget(self.frame)
         
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(300, 0, 181, 71))
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(300, 10, 181, 100))
         self.verticalLayoutWidget_2.setObjectName(_fromUtf8("verticalLayoutWidget_2"))
         
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.verticalLayoutWidget_2)
@@ -184,7 +186,7 @@ class Ui_MainWindow(QtGui.QWidget):
         ######## Layout : RadioButton1 ##########
         self.radioButton = QtGui.QRadioButton(self.widget_2)
         
-        self.radioButton.setGeometry(QtCore.QRect(20, 16, 82, 21))
+        self.radioButton.setGeometry(QtCore.QRect(2, 0, 82, 21))
         
         font = QtGui.QFont()
         
@@ -201,7 +203,7 @@ class Ui_MainWindow(QtGui.QWidget):
         ######## RadioButton2 Design Layout : Begin ########
         self.radioButton_2 = QtGui.QRadioButton(self.widget_2)
         
-        self.radioButton_2.setGeometry(QtCore.QRect(20, 30, 111, 20))
+        self.radioButton_2.setGeometry(QtCore.QRect(2, 40, 111, 20))
 
         font = QtGui.QFont()
         
@@ -214,6 +216,8 @@ class Ui_MainWindow(QtGui.QWidget):
 
         self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
         self.radioButton_2.clicked.connect(self.test_notPassed)
+
+        self.verticalLayout_2.addWidget(self.widget_2)
         ######## The End : RadioButton2 #########
 
         ############ The End : RadioButton Layout code ##############
@@ -221,7 +225,7 @@ class Ui_MainWindow(QtGui.QWidget):
         ####### Design Layout Text Edit : Begin #########
         self.horizontalLayoutWidget = QtGui.QWidget(self.frame)
         
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 190, 461, 111))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 170, 461, 151))
         self.horizontalLayoutWidget.setObjectName(_fromUtf8("horizontalLayoutWidget"))
         
         self.horizontalLayout = QtGui.QHBoxLayout(self.horizontalLayoutWidget)
@@ -296,7 +300,7 @@ class Ui_MainWindow(QtGui.QWidget):
         ############## ComboBox Layout Code ##################
         self.comboBox = QtGui.QComboBox(self.widget_4)
         
-        self.comboBox.setGeometry(QtCore.QRect(5, 15, 101, 31))
+        self.comboBox.setGeometry(QtCore.QRect(2, 10, 101, 31))
 
         font = QtGui.QFont()
         
@@ -359,7 +363,7 @@ class Ui_MainWindow(QtGui.QWidget):
 
         self.progressBar = QtGui.QProgressBar(self.widget_4)
         
-        self.progressBar.setGeometry(QtCore.QRect(5, 55, 161, 21))
+        self.progressBar.setGeometry(QtCore.QRect(2, 50, 161, 21))
         
         font = QtGui.QFont()
         
@@ -369,12 +373,12 @@ class Ui_MainWindow(QtGui.QWidget):
         font.setWeight(75)
         
         self.progressBar.setFont(font)
-        self.progressBar.setProperty("value", 24)
+        self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         
         self.lcdNumber = QtGui.QLCDNumber(self.widget_4)
         
-        self.lcdNumber.setGeometry(QtCore.QRect(115, 15, 41, 31))
+        self.lcdNumber.setGeometry(QtCore.QRect(115, 10, 41, 31))
         self.lcdNumber.setFrameShape(QtGui.QFrame.WinPanel)
         self.lcdNumber.setDigitCount(3)
         self.lcdNumber.setObjectName(_fromUtf8("lcdNumber"))
@@ -477,6 +481,8 @@ class Ui_MainWindow(QtGui.QWidget):
             
             #print self.EnvVar
             #print self.ValVar
+
+            progess_Var = self.ProgressBar()
             
             self.message = ("Loaded successfully: %s \n"%os.path.split(str(self.ExcelSheet))[1])
             
@@ -484,7 +490,7 @@ class Ui_MainWindow(QtGui.QWidget):
             self.textEdit.setTextColor(QtGui.QColor("green"))
             self.textEdit.insertPlainText(self.message)
 
-            callVar = self.ValueChange()
+            comboBox_Var = self.ValueChange()
         except IOError:
             self.message = "You did not choose a file \n Please check again!"
             
@@ -511,9 +517,13 @@ class Ui_MainWindow(QtGui.QWidget):
         
         if (self.FileName != ""):
             #print self.ConfigFile
+            
             self.message = ("Loaded successfully: %s"%os.path.split(str(self.ConfigFile))[1])
             
             self.textEdit.clear()
+
+            progess_Var = self.ProgressBar()
+
             self.textEdit.setTextColor(QtGui.QColor("green"))
             self.textEdit.insertPlainText(self.message)
             
@@ -543,27 +553,35 @@ class Ui_MainWindow(QtGui.QWidget):
             self.file.write("var.set_EnvVar('%s',%s) \n"%(self.EnvVar[i],self.ValVar[i]))
         
         self.file.close()"""
+        try:
+            self.inst = App_BackEnd.Py_CANoe()
+            self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
 
-        self.inst = App_BackEnd.Py_CANoe()
-        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
+            self.message = ("Script generated successfully.")
 
-        self.message = ("Script generated successfully.")
-        
-        self.textEdit.clear()
-        self.textEdit.setTextColor(QtGui.QColor("green"))
-        self.textEdit.insertPlainText(self.message)
+            self.textEdit.clear()
+            self.textEdit.setTextColor(QtGui.QColor("green"))
 
-        name = QtGui.QFileDialog.getSaveFileName(self,'Generate & Save !')
-        file = open(name,'w')
-        file.close()
+            progess_Var = self.ProgressBar()
+            self.textEdit.insertPlainText(self.message)
 
-        self.counter = 0
+            name = QtGui.QFileDialog.getSaveFileName(self,'Generate & Save !')
+            file = open(name,'w')
+            file.close()
 
+            self.counter = 0
+
+        except IOError:
+            self.message = "You did not choose a file \n Please check again!"
+            
+            self.textEdit.clear()
+            self.textEdit.setTextColor(QtGui.QColor("red"))
+            self.textEdit.insertPlainText(self.message)
 
 
     def call_scriptPy(self,**keywords):
         
-        self.message = ("Your Test will start in minute! Please wait a little ^_^ ...")
+        self.message = ("This will take few seconds ! Please wait ^_^ ...")
 
         self.textEdit.clear()
         self.textEdit.setTextColor(QtGui.QColor("Blue"))
@@ -571,10 +589,11 @@ class Ui_MainWindow(QtGui.QWidget):
         
         if (self.counter == 0):
             self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File', '*.py')
-            subprocess.call(["python",str(self.PyScript)])
-            
+            progess_Var = self.ProgressBar()
+            subprocess.call(["python",str(self.PyScript)])       
         else:
             subprocess.call(["python","Script.py"])
+            progess_Var = self.ProgressBar()
 
 
         '''    
@@ -650,6 +669,14 @@ class Ui_MainWindow(QtGui.QWidget):
         self.counter = 1
 
 
+    def ProgressBar(self):
+        self.completed = 0
+
+        while self.completed < 100:
+            self.completed += 0.0001
+            self.progressBar.setValue(self.completed)
+
+
     def close_application(self):
         choice = QtGui.QMessageBox.question(self, 'NOTICE',"Are you sure ?", 
                                             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
@@ -717,7 +744,7 @@ class Ui_MainWindow(QtGui.QWidget):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         
-        self.pushButton.setText(_translate("MainWindow", "Load", None))
+        self.pushButton.setText(_translate("MainWindow", "Excel Sheet", None))
         
         self.pushButton_2.setText(_translate("MainWindow", "Configuration", None))
         
