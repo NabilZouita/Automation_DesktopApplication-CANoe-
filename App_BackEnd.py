@@ -12,6 +12,7 @@ class ExcelPy:
         #### First test case ####
         #print("Hello world !")
         pass
+
         #### Test File entered #####
     def TestFile(self,PathExc):
         try:
@@ -72,6 +73,7 @@ class ExcelPy:
         self.cell.alignment = Alignment(horizontal='center', vertical='center')
 
         self.wb.save(PathExc)
+
 
     def LogEditorNotPass(self,PathExc,WSheetVal):
         self.wb = openpyxl.load_workbook(PathExc)
