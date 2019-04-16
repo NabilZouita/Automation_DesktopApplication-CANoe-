@@ -482,6 +482,12 @@ class Ui_MainWindow(QtGui.QWidget):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 
+    def TextEditMessage(self,message,color):
+        self.textEdit.clear()
+        self.textEdit.setTextColor(QtGui.QColor(color))
+        self.textEdit.insertPlainText(message)
+
+
     def load_sheet(self):
         try:
             self.ExcelSheet = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.xlsx')
@@ -494,12 +500,13 @@ class Ui_MainWindow(QtGui.QWidget):
             #print self.ValVar
 
             progess_Var = self.ProgressBar()
-            
+
+            """ Previous Block of code """
             self.message = ("Loaded successfully: %s \n"%os.path.split(str(self.ExcelSheet))[1])
-            
-            self.textEdit.clear()
-            self.textEdit.setTextColor(QtGui.QColor("green"))
-            self.textEdit.insertPlainText(self.message)
+            messageVar = self.TextEditMessage(self.message,"green")            
+            #self.textEdit.clear()
+            #self.textEdit.setTextColor(QtGui.QColor("green"))
+            #self.textEdit.insertPlainText(self.message)
 
             comboBox_Var = self.ValueChange()
 
@@ -509,11 +516,11 @@ class Ui_MainWindow(QtGui.QWidget):
             self.pushButton_2.setEnabled(True)
 
         except IOError:
-            self.message = "You did not choose a file \n Please check again!"
-            
-            self.textEdit.clear()
-            self.textEdit.setTextColor(QtGui.QColor("red"))
-            self.textEdit.insertPlainText(self.message)
+            messageVar = self.TextEditMessage("You did not choose a file \nPlease check again!","red")
+            """ LAST CODE """
+            #self.textEdit.clear()
+            #self.textEdit.setTextColor(QtGui.QColor("red"))
+            #self.textEdit.insertPlainText(self.message)
         except:
             raise
 
@@ -534,23 +541,26 @@ class Ui_MainWindow(QtGui.QWidget):
         
         if (self.FileName != ""):
             #print self.ConfigFile
-            
-            self.message = ("Loaded successfully: %s"%os.path.split(str(self.ConfigFile))[1])
-            
-            self.textEdit.clear()
 
             progess_Var = self.ProgressBar()
 
-            self.textEdit.setTextColor(QtGui.QColor("green"))
-            self.textEdit.insertPlainText(self.message)
+            self.message = ("Loaded successfully Config name: %s"%os.path.split(str(self.ConfigFile))[1])
+            messageVar = self.TextEditMessage(self.message,"green")
+            """ Last Functional code : Text Message """
+            #self.textEdit.clear()
+
+            #progess_Var = self.ProgressBar()
+
+            #self.textEdit.setTextColor(QtGui.QColor("green"))
+            #self.textEdit.insertPlainText(self.message)
             
             self.pushButton_3.setEnabled(True)
         else:
-            self.message = ("You did not choose a correct Config File \nPlease Check again !")
-            
-            self.textEdit.clear()
-            self.textEdit.setTextColor(QtGui.QColor("red"))
-            self.textEdit.insertPlainText(self.message)
+            messageVar = self.TextEditMessage("You did not choose a correct Config File \nPlease Check again !","red")
+            """ Last code """
+            #self.textEdit.clear()
+            #self.textEdit.setTextColor(QtGui.QColor("red"))
+            #self.textEdit.insertPlainText(self.message)
 
         """ Caling PyCan_Exec from here """
         #self.VarTemp = App_BackEnd.Py_CANoe()
@@ -572,9 +582,11 @@ class Ui_MainWindow(QtGui.QWidget):
         self.inst = App_BackEnd.Py_CANoe()
         self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
         try:
-            self.message = ("Script generated successfully.\nYou can save it !")
-            self.textEdit.clear()
-            self.textEdit.setTextColor(QtGui.QColor("green"))
+            messageVar = self.TextEditMessage("Script generated successfully.\nYou can save it !","green")
+            """ Last code """
+            #self.message = ("Script generated successfully.\nYou can save it !")
+            #self.textEdit.clear()
+            #self.textEdit.setTextColor(QtGui.QColor("green"))
 
             progess_Var = self.ProgressBar()
             self.textEdit.insertPlainText(self.message)
@@ -588,19 +600,18 @@ class Ui_MainWindow(QtGui.QWidget):
             self.pushButton_4.setEnabled(True)
 
         except IOError:
-            self.message = "You did not save your file \n File will execute automatically!"
+            messageVar = self.TextEditMessage("You did not save your file \n File will execute automatically!","red")
             
-            self.textEdit.clear()
-            self.textEdit.setTextColor(QtGui.QColor("red"))
-            self.textEdit.insertPlainText(self.message)
+            """ Edited Code """
+            #self.message = "You did not save your file \n File will execute automatically!"
+            
+            #self.textEdit.clear()
+            #self.textEdit.setTextColor(QtGui.QColor("red"))
+            #self.textEdit.insertPlainText(self.message)
 
 
     def Execute_PyScript(self,**keywords):
-        self.message = ("This will take few seconds ! Please wait ^_^ ...")
-        self.textEdit.clear()
-        self.textEdit.setTextColor(QtGui.QColor("Blue"))
-        self.textEdit.insertPlainText(self.message)
-        
+        messageVar = self.TextEditMessage("This will take few seconds ! Please wait ^_^ ...","Blue")
         try:
             if (self.counter == 0):
                 self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File', '*.py')
@@ -609,12 +620,9 @@ class Ui_MainWindow(QtGui.QWidget):
                 subprocess.call(["python","Script.py"])
                 progess_Var = self.ProgressBar()
 
-
-            self.message = ("Execution started ! Please check CANoe")
-            self.textEdit.clear()
-            self.textEdit.setTextColor(QtGui.QColor("Blue"))
-            self.textEdit.insertPlainText(self.message)
+            messageVar = ("Execution started ! Please check CANoe","Blue")
         except IOError:
+            messageVar = self.TextEditMessage("")
             self.message = "No script has been choosen \n Please proceed again!"         
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("red"))
@@ -843,6 +851,6 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.setWindowIcon(QtGui.QIcon('python_logo.png'))
-    MainWindow.setWindowTitle("AltranTunisia_IHM_FYP2019")
+    MainWindow.setWindowTitle("AltranTunisia_HMI_FYP2019")
     MainWindow.show()
     sys.exit(app.exec_())
