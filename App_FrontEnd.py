@@ -127,7 +127,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
         self.pushButton_3.setEnabled(False)
         self.pushButton_3.setStatusTip("Generate & Save Script")
-        self.pushButton_3.clicked.connect(self.generate_script)
+        self.pushButton_3.clicked.connect(self.GenerateScript)
         """ PushButton 3 Layout Design : End"""
 
         """ PushButton 4 Layout Design : Begin """
@@ -147,7 +147,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton_4.setObjectName(_fromUtf8("pushButton_4"))
         self.pushButton_4.setStatusTip("Execute choosen script")
         self.pushButton_4.setEnabled(False)
-        self.pushButton_4.clicked.connect(self.call_scriptPy)
+        self.pushButton_4.clicked.connect(self.Execute_PyScript)
         """ PushButton 4 Layout Design : End """
 
         ########### Layout Two lines : Begin #############
@@ -390,7 +390,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.lcdNumber.setFrameShape(QtGui.QFrame.WinPanel)
         self.lcdNumber.setDigitCount(3)
         self.lcdNumber.setObjectName(_fromUtf8("lcdNumber"))
-        self.lcdNumber.setStatusTip("The number of Tests available to execute")
+        self.lcdNumber.setStatusTip("Number of Template executable Tests")
 
         ######## End : QLCDNumber Widget ############
         self.verticalLayout_3.addWidget(self.widget_4)
@@ -428,8 +428,8 @@ class Ui_MainWindow(QtGui.QWidget):
         self.actionOpen_Sheet = QtGui.QAction(MainWindow)
         
         self.actionOpen_Sheet.setObjectName(_fromUtf8("actionOpen_Sheet"))
-        self.actionQuit.setShortcut("Ctrl+O")
-        self.actionQuit.setStatusTip("Open & Choose Template !")
+        self.actionOpen_Sheet.setShortcut("Ctrl+O")
+        self.actionOpen_Sheet.setStatusTip("Open & Choose Template !")
         
         self.actionOpen_Config = QtGui.QAction(MainWindow)
         
@@ -546,7 +546,7 @@ class Ui_MainWindow(QtGui.QWidget):
             
             self.pushButton_3.setEnabled(True)
         else:
-            self.message = ("You did not choose a correct Config File \n Please Check !")
+            self.message = ("You did not choose a correct Config File \nPlease Check again !")
             
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("red"))
@@ -557,7 +557,7 @@ class Ui_MainWindow(QtGui.QWidget):
         #print self.VarTemp.PyCan_Exec(self.ConfigFile)
 
 
-    def generate_script(self):
+    def GenerateScript(self):
         """
         self.file = open("Script.py","w")
         self.file.write("from Python_CANoe import CANoe \n")
@@ -572,7 +572,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.inst = App_BackEnd.Py_CANoe()
         self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
         try:
-            self.message = ("Script generated successfully.")
+            self.message = ("Script generated successfully.\nYou can save it !")
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("green"))
 
@@ -595,30 +595,30 @@ class Ui_MainWindow(QtGui.QWidget):
             self.textEdit.insertPlainText(self.message)
 
 
-    def call_scriptPy(self,**keywords):
+    def Execute_PyScript(self,**keywords):
+        self.message = ("This will take few seconds ! Please wait ^_^ ...")
+        self.textEdit.clear()
+        self.textEdit.setTextColor(QtGui.QColor("Blue"))
+        self.textEdit.insertPlainText(self.message)
+        
         try:
-            self.message = ("This will take few seconds ! Please wait ^_^ ...")
-            self.textEdit.clear()
-            self.textEdit.setTextColor(QtGui.QColor("Blue"))
-            self.textEdit.insertPlainText(self.message)
             if (self.counter == 0):
                 self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File', '*.py')
                 subprocess.call(["python",str(self.PyScript)])
             else:
                 subprocess.call(["python","Script.py"])
                 progess_Var = self.ProgressBar()
-        except:
-            self.message = "No script has been choosen \n Please proceed again!"
-            
+
+
+            self.message = ("Execution started ! Please check CANoe")
+            self.textEdit.clear()
+            self.textEdit.setTextColor(QtGui.QColor("Blue"))
+            self.textEdit.insertPlainText(self.message)
+        except IOError:
+            self.message = "No script has been choosen \n Please proceed again!"         
             self.textEdit.clear()
             self.textEdit.setTextColor(QtGui.QColor("red"))
             self.textEdit.insertPlainText(self.message)
-
-        self.message = ("Execution started ! Please check CANoe")
-        self.textEdit.clear()
-        self.textEdit.setTextColor(QtGui.QColor("Blue"))
-        self.textEdit.insertPlainText(self.message)
-
 
         '''    
         self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
@@ -642,6 +642,11 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
+        self.message = ("Test (%i) state : Successfull. \nCheck your Excel Template"%self.varTemp)
+        self.textEdit.clear()
+        self.textEdit.setTextColor(QtGui.QColor("Purple"))
+        self.textEdit.insertPlainText(self.message)
+
 
     def test_notPassed(self):
         self.state = self.radioButton_2.isChecked()
@@ -651,11 +656,16 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
+        self.message = ("Test (%i) state : Not Pass.\nCheck your Excel Template"%self.varTemp)
+        self.textEdit.clear()
+        self.textEdit.setTextColor(QtGui.QColor("Purple"))
+        self.textEdit.insertPlainText(self.message)
+
 
     def ValueChange(self):
         #self.message = ("current value:"+str(self.spinBox.value()))
 
-        """ Trying to get number of sheets automatically """
+        """ Get the Template number of sheets """
         self.inst = App_BackEnd.ExcelPy()
         TempRes = self.inst.GetNumbSheets(str(self.ExcelSheet))
         print TempRes
@@ -833,6 +843,6 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.setWindowIcon(QtGui.QIcon('python_logo.png'))
-    MainWindow.setWindowTitle("PFE2019_AltranTunisie_IHM")
+    MainWindow.setWindowTitle("AltranTunisia_IHM_FYP2019")
     MainWindow.show()
     sys.exit(app.exec_())
