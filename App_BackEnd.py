@@ -3,7 +3,7 @@ import openpyxl
 import os, sys
 from xlrd import open_workbook, XLRDError
 from openpyxl import Workbook
-from openpyxl.styles import Alignment 
+from openpyxl.styles import Alignment, Font 
 from Python_CANoe import CANoe
 
 
@@ -71,6 +71,7 @@ class ExcelPy:
         self.cell = self.sheet.cell(row=1, column=3)
         self.cell.value = 'Test OK'
         self.cell.alignment = Alignment(horizontal='center', vertical='center')
+        self.cell.font = Font(bold=True, size=16, color="008000")
 
         self.wb.save(PathExc)
 
@@ -84,6 +85,7 @@ class ExcelPy:
         self.cell = self.sheet.cell(row=1, column=3)
         self.cell.value = 'Test Not OK'
         self.cell.alignment = Alignment(horizontal='center', vertical='center')
+        self.cell.font = Font(bold=True, size=16, color="FF6347")
 
         self.wb.save(PathExc)
 
