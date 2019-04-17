@@ -26,7 +26,7 @@ except AttributeError:
 
 class Ui_MainWindow(QtGui.QWidget):
     def setupUi(self, MainWindow):
-    
+        ######### MainWindow Setup : Begin ############
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(532, 377)
         
@@ -128,9 +128,9 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton_3.setEnabled(False)
         self.pushButton_3.setStatusTip("Generate & Save Script")
         self.pushButton_3.clicked.connect(self.GenerateScript)
-        """ PushButton 3 Layout Design : End"""
+        ######## PushButton 3 Layout Design : End #########
 
-        """ PushButton 4 Layout Design : Begin """
+        ######## PushButton 4 Layout Design : Begin #########
         self.pushButton_4 = QtGui.QPushButton(self.widget)
         
         self.pushButton_4.setGeometry(QtCore.QRect(138, 90, 111, 61))
@@ -148,7 +148,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.pushButton_4.setStatusTip("Execute choosen script")
         self.pushButton_4.setEnabled(False)
         self.pushButton_4.clicked.connect(self.Execute_PyScript)
-        """ PushButton 4 Layout Design : End """
+        ######## PushButton 4 Layout Design : End ##########
 
         ########### Layout Two lines : Begin #############
         self.line = QtGui.QFrame(self.widget)
@@ -163,8 +163,10 @@ class Ui_MainWindow(QtGui.QWidget):
         self.line_2.setFrameShape(QtGui.QFrame.VLine)
         self.line_2.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_2.setObjectName(_fromUtf8("line_2"))
-        ########### Two lines Edit code : End #############        
+        ########### Layout Design Two lines : End #############        
         self.verticalLayout.addWidget(self.widget)
+        ########## PushButtons Layout Design : Begin ##########
+
         ########### Design RadioButton : Begin ###########
         self.verticalLayoutWidget_2 = QtGui.QWidget(self.frame)
         
@@ -187,6 +189,7 @@ class Ui_MainWindow(QtGui.QWidget):
 
         self.widget_2.setSizePolicy(sizePolicy)
         self.widget_2.setObjectName(_fromUtf8("widget_2"))
+
         ######## Layout : RadioButton1 ##########
         self.radioButton = QtGui.QRadioButton(self.widget_2)
         
@@ -253,41 +256,9 @@ class Ui_MainWindow(QtGui.QWidget):
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
         
         self.horizontalLayout.addWidget(self.textEdit)
-        ###### Text Edit Design Layout : End ######"" 
-
-        """ Deleted Text Edit Layout
-        self.horizontalLayoutWidget = QtGui.QWidget(self.frame)
+        ###### Text Edit Design Layout : End ######
         
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 140, 371, 91))
-        self.horizontalLayoutWidget.setObjectName(_fromUtf8("horizontalLayoutWidget"))
-        
-        self.horizontalLayout = QtGui.QHBoxLayout(self.horizontalLayoutWidget)
-        
-        self.horizontalLayout.setMargin(11)
-        self.horizontalLayout.setSpacing(6)
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        
-        self.widget_3 = QtGui.QWidget(self.horizontalLayoutWidget)
-        
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
-        
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget_3.sizePolicy().hasHeightForWidth())
-        
-        self.widget_3.setSizePolicy(sizePolicy)
-        self.widget_3.setObjectName(_fromUtf8("widget_3"))
-        
-        self.textEdit = QtGui.QTextEdit(self.widget_3)
-        
-        self.textEdit.setGeometry(QtCore.QRect(0, 0, 337, 59))
-        self.textEdit.setObjectName(_fromUtf8("textEdit"))
-        #self.textEdit.clicked.connect(self.TextEditor)
-        
-        self.horizontalLayout.addWidget(self.widget_3)
-        Here Ends the deleted part """
-        
-        ########## ComboBox + LCD + ProgressBar Layout : Begin ###################
+        ########## ComboBox + LCD + ProgressBar Design Layout : Begin ##############
         self.verticalLayoutWidget_3 = QtGui.QWidget(self.frame)
         
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(300, 80, 181, 101))
@@ -303,7 +274,7 @@ class Ui_MainWindow(QtGui.QWidget):
         
         self.widget_4.setObjectName(_fromUtf8("widget_4"))
 
-        ############## ComboBox Layout Code ##################
+        ############## ComboBox Layout Code : Begin ##################
         self.comboBox = QtGui.QComboBox(self.widget_4)
         
         self.comboBox.setGeometry(QtCore.QRect(2, 10, 101, 31))
@@ -320,54 +291,10 @@ class Ui_MainWindow(QtGui.QWidget):
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
         self.comboBox.setStatusTip("Complete list of Tests in the Template")
         self.comboBox.currentIndexChanged.connect(self.SecondSheet)  
-        """
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        self.comboBox.addItem(_fromUtf8(""))
-        """
-        ######## The End ##############
 
-        ######## Begin QLCDNumber Widget #######
-        """ SpinBox Widget Deleted 
-        self.spinBox = QtGui.QSpinBox(self.widget_4)
-        
-        self.spinBox.setGeometry(QtCore.QRect(110, 0.75, 42, 22))
-        self.spinBox.setObjectName(_fromUtf8("spinBox"))
-        self.spinBox.setMinimum(0)
-        #self.spinBox.valueChanged.connect(self.ValueChange)"""
+        ######## ComboBox Layout Code : The End ##############
 
+        ######## QLCDNumber Widget Layout Design : Begin #######
         self.progressBar = QtGui.QProgressBar(self.widget_4)
         
         self.progressBar.setGeometry(QtCore.QRect(2, 50, 161, 21))
@@ -392,12 +319,13 @@ class Ui_MainWindow(QtGui.QWidget):
         self.lcdNumber.setObjectName(_fromUtf8("lcdNumber"))
         self.lcdNumber.setStatusTip("Number of Template executable Tests")
 
-        ######## End : QLCDNumber Widget ############
+        ######## QLCDNumber Widget Layout Design : End ############
         self.verticalLayout_3.addWidget(self.widget_4)
-
-
+        ######## ComboBox + LCD + ProgressBar Design Layout : End ##########
         MainWindow.setCentralWidget(self.centralWidget)
-        
+        ######## MainWindow Setup : End ##########
+
+        ######## MainWindow MenuBar Setup : Begin ########
         self.menuBar = QtGui.QMenuBar(MainWindow)
         
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 407, 21))
@@ -480,8 +408,9 @@ class Ui_MainWindow(QtGui.QWidget):
         self.retranslateUi(MainWindow)
         
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        ######## MainWindow MenuBar Setup : End ######## 
 
-
+        ######## Front_End Functions : Begin ########
     def TextEditMessage(self,message,color):
         self.textEdit.clear()
         self.textEdit.setTextColor(QtGui.QColor(color))
@@ -496,18 +425,11 @@ class Ui_MainWindow(QtGui.QWidget):
             self.EnvVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[0]
             self.ValVar = self.InstVar.ParseFSheet(str(self.ExcelSheet))[1]
             
-            #print self.EnvVar
-            #print self.ValVar
-
             progess_Var = self.ProgressBar()
 
-            """ Previous Block of code """
             self.message = ("Loaded successfully: %s \n"%os.path.split(str(self.ExcelSheet))[1])
             messageVar = self.TextEditMessage(self.message,"green")            
-            #self.textEdit.clear()
-            #self.textEdit.setTextColor(QtGui.QColor("green"))
-            #self.textEdit.insertPlainText(self.message)
-
+            
             comboBox_Var = self.ValueChange()
 
             self.instVar = App_BackEnd.ExcelPy()
@@ -517,21 +439,8 @@ class Ui_MainWindow(QtGui.QWidget):
 
         except IOError:
             messageVar = self.TextEditMessage("You did not choose a file \nPlease check again!","red")
-            """ LAST CODE """
-            #self.textEdit.clear()
-            #self.textEdit.setTextColor(QtGui.QColor("red"))
-            #self.textEdit.insertPlainText(self.message)
         except:
             raise
-
-        #This is for seeing the var type : non str
-        #print self.ExcelSheet 
-        
-        """ Trying to change the type of var """
-        #test = os.path.splitext(str(ExcelSheet))
-        #print test   
-        #print len(self.ValVar)
-        #return self.VarTemp
 
 
     def load_config(self):
@@ -540,57 +449,24 @@ class Ui_MainWindow(QtGui.QWidget):
         self.FileName = os.path.split(str(self.ConfigFile))[1]
         
         if (self.FileName != ""):
-            #print self.ConfigFile
-
             progess_Var = self.ProgressBar()
 
             self.message = ("Loaded successfully Config name: %s"%os.path.split(str(self.ConfigFile))[1])
             messageVar = self.TextEditMessage(self.message,"green")
-            """ Last Functional code : Text Message """
-            #self.textEdit.clear()
-
-            #progess_Var = self.ProgressBar()
-
-            #self.textEdit.setTextColor(QtGui.QColor("green"))
-            #self.textEdit.insertPlainText(self.message)
             
             self.pushButton_3.setEnabled(True)
         else:
             messageVar = self.TextEditMessage("You did not choose a correct Config File \nPlease Check again !","red")
-            """ Last code """
-            #self.textEdit.clear()
-            #self.textEdit.setTextColor(QtGui.QColor("red"))
-            #self.textEdit.insertPlainText(self.message)
-
-        """ Caling PyCan_Exec from here """
-        #self.VarTemp = App_BackEnd.Py_CANoe()
-        #print self.VarTemp.PyCan_Exec(self.ConfigFile)
 
 
     def GenerateScript(self):
-        """
-        self.file = open("Script.py","w")
-        self.file.write("from Python_CANoe import CANoe \n")
-        self.file.write("var = CANoe() \n")
-        self.file.write("var.open_simulation('%s') \n"%self.ConfigFile)
-        self.file.write("var.start_Measurement() \n")
-        
-        for i in range(len(self.ValVar)):
-            self.file.write("var.set_EnvVar('%s',%s) \n"%(self.EnvVar[i],self.ValVar[i]))
-        
-        self.file.close()"""
         self.inst = App_BackEnd.Py_CANoe()
         self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
         try:
             messageVar = self.TextEditMessage("Script generated successfully.\nYou can save it !","green")
-            """ Last code """
-            #self.message = ("Script generated successfully.\nYou can save it !")
-            #self.textEdit.clear()
-            #self.textEdit.setTextColor(QtGui.QColor("green"))
-
+            
             progess_Var = self.ProgressBar()
-            self.textEdit.insertPlainText(self.message)
-
+            
             name = QtGui.QFileDialog.getSaveFileName(self,'Generate & Save !')
             file = open(name,'w')
             file.close()
@@ -598,19 +474,11 @@ class Ui_MainWindow(QtGui.QWidget):
             self.counter = 0
 
             self.pushButton_4.setEnabled(True)
-
         except IOError:
             messageVar = self.TextEditMessage("You did not save your file \n File will execute automatically!","red")
             
-            """ Edited Code """
-            #self.message = "You did not save your file \n File will execute automatically!"
-            
-            #self.textEdit.clear()
-            #self.textEdit.setTextColor(QtGui.QColor("red"))
-            #self.textEdit.insertPlainText(self.message)
 
-
-    def Execute_PyScript(self,**keywords):
+    def Execute_PyScript(self):
         messageVar = self.TextEditMessage("This will take few seconds ! Please wait ^_^ ...","Blue")
         try:
             if (self.counter == 0):
@@ -620,27 +488,10 @@ class Ui_MainWindow(QtGui.QWidget):
                 subprocess.call(["python","Script.py"])
                 progess_Var = self.ProgressBar()
 
-            messageVar = ("Execution started ! Please check CANoe","Blue")
+            messageVar = self.TextEditMessage("Execution started ! Please check CANoe","Blue")
         except IOError:
-            messageVar = self.TextEditMessage("")
-            self.message = "No script has been choosen \n Please proceed again!"         
-            self.textEdit.clear()
-            self.textEdit.setTextColor(QtGui.QColor("red"))
-            self.textEdit.insertPlainText(self.message)
-
-        '''    
-        self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
-        subprocess.call(["python",str(self.PyScript)])'''
-
-        '''
-        if (callBool == True):
-            self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
-            subprocess.call(["python",str(self.PyScript)])
-        else:
-            self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File','*.py')
-            subprocess.call(["python",str(self.PyScript)])
-        '''
-
+            messageVar = self.TextEditMessage("No script has been choosen \n Please proceed again!","red")
+    
 
     def test_passed(self):
         self.state = self.radioButton.isChecked()
@@ -650,11 +501,8 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
-        self.message = ("Test (%i) state : Successfull. \nCheck your Excel Template"%self.varTemp)
-        self.textEdit.clear()
-        self.textEdit.setTextColor(QtGui.QColor("Purple"))
-        self.textEdit.insertPlainText(self.message)
-
+        messageVar = self.TextEditMessage("Test (%i) state : Successfull. \nCheck your Excel Template"%self.varTemp,"Purple")
+    
 
     def test_notPassed(self):
         self.state = self.radioButton_2.isChecked()
@@ -664,21 +512,13 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
-        self.message = ("Test (%i) state : Not Pass.\nCheck your Excel Template"%self.varTemp)
-        self.textEdit.clear()
-        self.textEdit.setTextColor(QtGui.QColor("Purple"))
-        self.textEdit.insertPlainText(self.message)
-
+        self.message = self.TextEditMessage("Test (%i) state : Not Pass.\nCheck your Excel Template"%self.varTemp,"Purple")
+        
 
     def ValueChange(self):
-        #self.message = ("current value:"+str(self.spinBox.value()))
-
-        """ Get the Template number of sheets """
         self.inst = App_BackEnd.ExcelPy()
         TempRes = self.inst.GetNumbSheets(str(self.ExcelSheet))
-        print TempRes
-
-        #Previous Value before change is "self.spinBox.value()"
+        
         for i in range(0,TempRes):
             self.comboBox.addItem(_fromUtf8(""))
             self.comboBox.setItemText(i, _translate("MainWindow", "Test %d"%i, None))
@@ -686,18 +526,14 @@ class Ui_MainWindow(QtGui.QWidget):
 
     def SecondSheet(self,index):
         self.varTemp = index
-        print ("Current index:",index)
         
         self.InstVar = App_BackEnd.ExcelPy()
         
         self.envVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index))[0]
         self.valVar = self.InstVar.ParseSSheet((str(self.ExcelSheet)),(index))[1]
-        
-        print self.envVar
-        print self.valVar
 
-        self.instVar = App_BackEnd.Py_CANoe()
-        self.instVar.SScript_Editor(self.envVar,self.valVar)
+        self.inst = App_BackEnd.Py_CANoe()
+        self.inst.SScript_Editor(self.envVar,self.valVar)
 
         self.counter = 1
 
@@ -727,44 +563,9 @@ class Ui_MainWindow(QtGui.QWidget):
         message_box.setWindowIcon(QtGui.QIcon('python_logo.png'))
         message_box.setText("PFE2019_AltranTunisie_IHM")
         message_box.setInformativeText("Automating CANoe process \nThis was done as End of Studies Project")
-        #message_box.setDetailedText("PFE2019_AltranTunisie_IHM")
-
-        #message_box.setStandardButtons(QtGui.QMessageBox.Ok)
-        #message_box.setDefaultButton(QtGui.QMessageBox.Ok)
-        #message_box.setEscapeButton(QtGui.QMessageBox.Ok)
-
+        
         message_box.exec_()
 
-        '''
-        MainWindow = QtGui.QDialog()
-        ui = Ui_MainWindow()
-        MainWindow.exec_()
-        '''
-        '''
-        self.textedit = QtGui.QTextEdit()
-        MainWindow.setCentralWidget(self.textedit)'''
-
-        '''
-        MainWindow = QtGui.QDialog()
-        ui = Ui_MainWindow()
-        with open("Test.txt","r") as f:
-            for line in f:
-                print line.strip()
-
-        MainWindow.exec_()'''
-
-        '''
-        MainWindow = QtGui.QDialog()
-        ui = Ui_MainWindow()
-        #ui = QtGui.QPlainTextEdit()
-        text = open("Test.txt").read()
-        ui.setPlainText(text)
-        with open("Test.txt","r") as f:
-            for line in f:
-                print line.strip()
-
-
-        MainWindow.show()'''
 
     def app_documentation(self):
         TextFile = QtGui.QDialog()
@@ -788,43 +589,7 @@ class Ui_MainWindow(QtGui.QWidget):
         self.radioButton.setText(_translate("MainWindow","Test OK",None))
         
         self.radioButton_2.setText(_translate("MainWindow","Test Not OK",None))
-        """
-        self.comboBox.setItemText(0, _translate("MainWindow", "Test 1", None))
-        self.comboBox.setItemText(1, _translate("MainWindow", "Test 2", None))
-        self.comboBox.setItemText(2, _translate("MainWindow", "Test 3", None))
-        self.comboBox.setItemText(3, _translate("MainWindow", "Test 4", None))
-        self.comboBox.setItemText(4, _translate("MainWindow", "Test 5", None))
-        self.comboBox.setItemText(5, _translate("MainWindow", "Test 6", None))
-        self.comboBox.setItemText(6, _translate("MainWindow", "Test 7", None))
-        self.comboBox.setItemText(7, _translate("MainWindow", "Test 8", None))
-        self.comboBox.setItemText(8, _translate("MainWindow", "Test 9", None))
-        self.comboBox.setItemText(9, _translate("MainWindow", "Test 10", None))
-        self.comboBox.setItemText(10, _translate("MainWindow", "Test 11", None))
-        self.comboBox.setItemText(11, _translate("MainWindow", "Test 12", None))
-        self.comboBox.setItemText(12, _translate("MainWindow", "Test 13", None))
-        self.comboBox.setItemText(13, _translate("MainWindow", "Test 14", None))
-        self.comboBox.setItemText(14, _translate("MainWindow", "Test 15", None))
-        self.comboBox.setItemText(15, _translate("MainWindow", "Test 16", None))
-        self.comboBox.setItemText(16, _translate("MainWindow", "Test 17", None))
-        self.comboBox.setItemText(17, _translate("MainWindow", "Test 18", None))
-        self.comboBox.setItemText(18, _translate("MainWindow", "Test 19", None))
-        self.comboBox.setItemText(19, _translate("MainWindow", "Test 20", None))
-        self.comboBox.setItemText(20, _translate("MainWindow", "Test 21", None))
-        self.comboBox.setItemText(21, _translate("MainWindow", "Test 22", None))
-        self.comboBox.setItemText(22, _translate("MainWindow", "Test 23", None))
-        self.comboBox.setItemText(23, _translate("MainWindow", "Test 24", None))
-        self.comboBox.setItemText(24, _translate("MainWindow", "Test 25", None))
-        self.comboBox.setItemText(25, _translate("MainWindow", "Test 26", None))
-        self.comboBox.setItemText(26, _translate("MainWindow", "Test 27", None))
-        self.comboBox.setItemText(27, _translate("MainWindow", "Test 28", None))
-        self.comboBox.setItemText(28, _translate("MainWindow", "Test 29", None))
-        self.comboBox.setItemText(29, _translate("MainWindow", "Test 30", None))
-        self.comboBox.setItemText(30, _translate("MainWindow", "Test 31", None))
-        self.comboBox.setItemText(31, _translate("MainWindow", "Test 32", None))
-        self.comboBox.setItemText(32, _translate("MainWindow", "Test 33", None))
-        self.comboBox.setItemText(33, _translate("MainWindow", "Test 34", None))
-        self.comboBox.setItemText(34, _translate("MainWindow", "Test 35", None))
-        """
+
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         
         self.menuHelp.setTitle(_translate("MainWindow", "Help", None))
