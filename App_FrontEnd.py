@@ -461,12 +461,12 @@ class Ui_MainWindow(QtGui.QWidget):
 
     def GenerateScript(self):
         self.inst = App_BackEnd.Py_CANoe()
-        self.inst.Script_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
+        self.inst.FScript_Editor(self.ConfigFile,self.EnvVar,self.ValVar)
         try:
-            messageVar = self.TextEditMessage("Script generated successfully.\nYou can save it !","green")
-            
             progess_Var = self.ProgressBar()
-            
+
+            messageVar = self.TextEditMessage("Script generated successfully.\nYou can save it !","green")
+        
             name = QtGui.QFileDialog.getSaveFileName(self,'Generate & Save !')
             file = open(name,'w')
             file.close()
@@ -475,24 +475,24 @@ class Ui_MainWindow(QtGui.QWidget):
 
             self.pushButton_4.setEnabled(True)
         except IOError:
-            messageVar = self.TextEditMessage("You did not save your file \n File will execute automatically!","red")
+            messageVar = self.TextEditMessage("You did not save your file \nFile will execute automatically!","red")
             
 
     def Execute_PyScript(self):
         messageVar = self.TextEditMessage("This will take few seconds ! Please wait ^_^ ...","Blue")
-        try:
-            if (self.counter == 0):
+        if (self.counter == 0):
+            try:
                 self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File', '*.py')
                 subprocess.call(["python",str(self.PyScript)])
-            else:
-                subprocess.call(["python","Script.py"])
-                progess_Var = self.ProgressBar()
-
-            messageVar = self.TextEditMessage("Execution started ! Please check CANoe","Blue")
-        except IOError:
-            messageVar = self.TextEditMessage("No script has been choosen \n Please proceed again!","red")
+                messageVar = self.TextEditMessage("Execution started ! Please check CANoe","Blue")
+            except:
+                messageVar = self.TextEditMessage("No script has been choosen \nPlease proceed again!","red")
+        else:
+            subprocess.call(["python","Script.py"])
+            progess_Var = self.ProgressBar()
+            messageVar = self.TextEditMessage("Execution finished ! Check CANoe","Blue")
     
-
+    
     def test_passed(self):
         self.state = self.radioButton.isChecked()
         if self.state == True:
