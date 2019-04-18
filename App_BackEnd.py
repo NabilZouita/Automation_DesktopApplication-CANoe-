@@ -9,8 +9,6 @@ from Python_CANoe import CANoe
 
 class ExcelPy:
     def __init__(self):
-        #### First test case ####
-        #print("Hello world !")
         pass
 
         #### Test File entered #####
@@ -29,7 +27,7 @@ class ExcelPy:
         return self.res
         
     def ParseFSheet(self,PathExc):
-        #self.temp = os.path.splitext(PathExc)
+
         self.list_Values = []
         self.list_EnVar = []
 
@@ -52,22 +50,14 @@ class ExcelPy:
         self.LTest_Value = self.sheet.col_values(1)
         
         return self.LTest_EnVar, self.LTest_Value
-        '''
-        for i in range(1,self.sheet.nrows):
-            self.cell_value = self.sheet.cell(i,1).value
-            self.cell_type = self.sheet.cell_type(i,1)
-            if(self.cell_type != 0):
-                self.LTest_EnVar.append(self.sheet.cell(i,1).value)
-                self.LTest_Value.append(int(self.sheet.cell(i,2).value))
-            else:
-                break '''         
-
+         
+         
     def LogEditorPass(self,PathExc,WSheetVal):
         self.wb = openpyxl.load_workbook(PathExc)
         
         self.sheet = self.wb.worksheets[WSheetVal]
         self.sheet.merge_cells('C1:D5')
-        
+
         self.cell = self.sheet.cell(row=1, column=3)
         self.cell.value = 'Test OK'
         self.cell.alignment = Alignment(horizontal='center', vertical='center')
@@ -94,35 +84,24 @@ class Py_CANoe:
     def __init__(self):
         pass
     # Checking path will be done in Python_CANoe.py
-    def Script_Editor(self,ConfigFile=None,EnvVar=None,EnvVal=None):
+    def FScript_Editor(self,ConfigFile=None,EnvVar=None,EnvVal=None):
         self.file = open("Script.py","w")
         
         self.file.write("from Python_CANoe import CANoe \n")
         self.file.write("var = CANoe() \n")
         self.file.write("var.open_simulation('%s') \n"%ConfigFile)
-        self.file.write("var.start_Measurement() \n")
-        
+        self.file.write("var.start_Measurement() \n")        
         for i in range(len(EnvVal)):
             self.file.write("var.set_EnvVar('%s',%s) \n"%(EnvVar[i],EnvVal[i]))
-        '''
-        if ('key' in keywords):
-            for i in range(len(envVar)):
-                self.file.write("var.set_EnvVar('%s',%s) \n"%(envVar[i],valVar[i]))
-        else:
-            pass
-        '''
+
 
         self.file.close()
 
 
     def SScript_Editor(self,envVar=None,valVar=None):
         self.file = open("Script.py","w")
-
         self.file.write("from Python_CANoe import CANoe \n")
         self.file.write("var = CANoe() \n")
-        #self.file.write("var.stop_Measurement() \n")
-        #self.file.write("var.start_Measurement() \n")
-
         for i in range(len(envVar)):
             self.file.write("var.set_EnvVar('%s',%s) \n"%(envVar[i],valVar[i]))
 
@@ -134,13 +113,4 @@ class Py_CANoe:
         self.root.open_simulation(path) #CANoe function restriction are in package
         self.root.start_Measurement()
         self.root.set_EnvVar()
-'''
-PathExc = "Python_ExcelParse.xlsx"
-inst = ExcelPy()
-print inst.ParseFSheet(PathExc)
-print inst.ParseSSheet(PathExc)
-print inst.LogEditor(PathExc)
 
-PathCAN = ""
-PyCan = Py_CANoe()
-print PyCan.PyCan_Exec(PathCAN)'''
