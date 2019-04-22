@@ -100,10 +100,8 @@ class Py_CANoe:
 
     def SScript_Editor(self,envVar=None,valVar=None):
         self.file = open("Script.py","w")
-        self.file.write("import time\n")
         self.file.write("from Python_CANoe import CANoe \n")
         self.file.write("var = CANoe() \n")
-        self.file.write("time.sleep(1)\n")
         for i in range(len(envVar)):
             self.file.write("var.set_EnvVar('%s',%s) \n"%(envVar[i],valVar[i]))
 
