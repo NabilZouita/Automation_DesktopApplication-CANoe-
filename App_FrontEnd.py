@@ -29,6 +29,7 @@ class Ui_MainWindow(QtGui.QWidget):
         ######### MainWindow Setup : Begin ############
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(532, 377)
+        MainWindow.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint)
         
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
@@ -427,7 +428,7 @@ class Ui_MainWindow(QtGui.QWidget):
             
             progess_Var = self.ProgressBar()
 
-            self.message = ("Loaded successfully: %s \n"%os.path.split(str(self.ExcelSheet))[1])
+            self.message = ("Loaded successfully: {} \n".format(os.path.split(str(self.ExcelSheet))[1]))
             messageVar = self.TextEditMessage(self.message,"green")            
             
             comboBox_Var = self.ValueChange()
@@ -451,7 +452,7 @@ class Ui_MainWindow(QtGui.QWidget):
         if (self.FileName != ""):
             progess_Var = self.ProgressBar()
 
-            self.message = ("Loaded successfully Config name: %s"%os.path.split(str(self.ConfigFile))[1])
+            self.message = ("Successfully Loaded Config name: {}".format(os.path.split(str(self.ConfigFile))[1]))
             messageVar = self.TextEditMessage(self.message,"green")
             
             self.pushButton_3.setEnabled(True)
@@ -484,7 +485,8 @@ class Ui_MainWindow(QtGui.QWidget):
             try:
                 self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File', '*.py')
                 subprocess.call(["python",str(self.PyScript)])
-                messageVar = self.TextEditMessage("Execution started ! Please check CANoe","Blue")
+                messageVar = self.TextEditMessage("Execution started ! Please check CANoe\n","Blue")
+                messageVar2 = self.TextEditMessage(str(sys.stdout),"green")
             except:
                 messageVar = self.TextEditMessage("No script has been choosen \nPlease proceed again!","red")
         else:
@@ -501,7 +503,7 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
-        messageVar = self.TextEditMessage("Test (%i) state : Successfull. \nCheck your Excel Template"%self.varTemp,"Purple")
+        messageVar = self.TextEditMessage("Test ({}) state : Successfull. \nCheck your Excel Template".format(self.varTemp),"Purple")
     
 
     def test_notPassed(self):
@@ -512,7 +514,7 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
-        self.message = self.TextEditMessage("Test (%i) state : Not Pass.\nCheck your Excel Template"%self.varTemp,"Purple")
+        self.message = self.TextEditMessage("Test ({}) state : Not Pass.\nCheck your Excel Template".format(self.varTemp),"Purple")
         
 
     def ValueChange(self):
@@ -521,7 +523,9 @@ class Ui_MainWindow(QtGui.QWidget):
         
         for i in range(0,TempRes):
             self.comboBox.addItem(_fromUtf8(""))
-            self.comboBox.setItemText(i, _translate("MainWindow", "Test %d"%i, None))
+            self.comboBox.setItemText(i, _translate("MainWindow", "Test {}".format(i), None))
+        """ This is for disabling items in ComboBox
+        self.comboBox.model().item(2).setEnabled(False)"""
 
 
     def SecondSheet(self,index):
