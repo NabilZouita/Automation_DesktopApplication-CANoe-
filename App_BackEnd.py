@@ -89,10 +89,10 @@ class Py_CANoe:
         
         self.file.write("from Python_CANoe import CANoe \n")
         self.file.write("var = CANoe() \n")
-        self.file.write("var.open_simulation('%s') \n"%ConfigFile)
+        self.file.write("var.open_simulation('{}') \n".format(ConfigFile))
         self.file.write("var.start_Measurement() \n")        
         for i in range(len(EnvVal)):
-            self.file.write("var.set_EnvVar('%s',%s) \n"%(EnvVar[i],EnvVal[i]))
+            self.file.write("var.set_EnvVar('{}',{}) \n".format(EnvVar[i],EnvVal[i]))
 
 
         self.file.close()
@@ -103,7 +103,7 @@ class Py_CANoe:
         self.file.write("from Python_CANoe import CANoe \n")
         self.file.write("var = CANoe() \n")
         for i in range(len(envVar)):
-            self.file.write("var.set_EnvVar('%s',%s) \n"%(envVar[i],valVar[i]))
+            self.file.write("var.set_EnvVar('{}',{}) \n".format(envVar[i],valVar[i]))
 
         self.file.close()        
 
