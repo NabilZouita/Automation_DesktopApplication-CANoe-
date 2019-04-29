@@ -9,6 +9,7 @@ import os, sys
 import subprocess
 import App_BackEnd
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtCore import pyqtSlot,SIGNAL,SLOT
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -486,13 +487,13 @@ class Ui_MainWindow(QtGui.QWidget):
                 self.PyScript = QtGui.QFileDialog.getOpenFileName(self,'Single File', '*.py')
                 subprocess.call(["python",str(self.PyScript)])
                 messageVar = self.TextEditMessage("Execution started ! Please check CANoe\n","Blue")
-                messageVar2 = self.TextEditMessage(str(sys.stdout),"green")
+                #messageVar2 = self.TextEditMessage(str(sys.stderr),"green") //redirect python interpreter output
             except:
                 messageVar = self.TextEditMessage("No script has been choosen \nPlease proceed again!","red")
         else:
-            subprocess.call(["python","Script.py"])
             progess_Var = self.ProgressBar()
-            messageVar = self.TextEditMessage("Execution finished ! Check CANoe","Blue")
+            subprocess.call(["python","Script.py"])
+            messageVar = self.TextEditMessage("Execution terminated","Blue")
     
     
     def test_passed(self):
@@ -503,7 +504,7 @@ class Ui_MainWindow(QtGui.QWidget):
         else:
             pass
 
-        messageVar = self.TextEditMessage("Test ({}) state : Successfull. \nCheck your Excel Template".format(self.varTemp),"Purple")
+        messageVar = self.TextEditMessage("Test ({}) state : Successfull.\nCheck your Excel Template".format(self.varTemp),"Purple")
     
 
     def test_notPassed(self):
@@ -566,7 +567,7 @@ class Ui_MainWindow(QtGui.QWidget):
         message_box.setWindowTitle("About this Application")
         message_box.setWindowIcon(QtGui.QIcon('python_logo.png'))
         message_box.setText("PFE2019_AltranTunisie_IHM")
-        message_box.setInformativeText("Automating CANoe process \nThis was done as End of Studies Project")
+        message_box.setInformativeText("Automating CANoe process\nThis was done as End of Studies Project")
         
         message_box.exec_()
 
